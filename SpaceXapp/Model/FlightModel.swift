@@ -30,6 +30,7 @@ struct Flight: Identifiable, Codable {
     private let date: String
     
     let details: String?
+    let crew: [String]
     let success: Bool?
     let links: Links
     let failures: [Failiure]
@@ -47,17 +48,6 @@ struct Flight: Identifiable, Codable {
         return Flight.fromStringToDateFormater.date(from: date)!
     }
     
-    //MARK: - Initiliazer
-    init(name: String, date: String, links: Links, success: Bool, details: String, failures: [Failiure],id: String) {
-        self.name = name
-        self.date = date
-        self.links = links
-        self.success = success
-        self.details = details
-        self.failures = failures
-        self.id = id
-    }
-    
     //MARK: - Coding keys
     enum CodingKeys: String, CodingKey {
         case name = "name"
@@ -66,11 +56,10 @@ struct Flight: Identifiable, Codable {
         case details = "details"
         case success = "success"
         case failures = "failures"
+        case crew = "crew"
         case id = "id"
     }
-    
 }
-
 
 struct Failiure: Codable {
     let time: Int

@@ -155,8 +155,8 @@ extension ViewController {
     
     private func configureDatasource() {
         
-        viewModel.dataSource = UITableViewDiffableDataSource(tableView: mainTableView,
-                                                             cellProvider: { tableView, indexPath, itemIdentifier in
+        viewModel.dataSource = .init(tableView: mainTableView,
+                                     cellProvider: { tableView, indexPath, itemIdentifier in
             let cell = tableView.dequeueReusableCell(
                 withIdentifier: "cell",
                 for: indexPath) as! MainCollectionViewCell

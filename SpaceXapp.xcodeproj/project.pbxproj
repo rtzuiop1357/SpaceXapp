@@ -7,6 +7,9 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		792215E927E27A1800E72ABA /* DetailCrewView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 792215E827E27A1800E72ABA /* DetailCrewView.swift */; };
+		792215EB27E27AF900E72ABA /* CrewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 792215EA27E27AF900E72ABA /* CrewModel.swift */; };
+		792215ED27E27F3E00E72ABA /* DetailCrewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 792215EC27E27F3E00E72ABA /* DetailCrewCell.swift */; };
 		79B6E0FE27E125A6004321A2 /* Swinject in Frameworks */ = {isa = PBXBuildFile; productRef = 79B6E0FD27E125A6004321A2 /* Swinject */; };
 		79B6E10427E12A90004321A2 /* ViewExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 79B6E10327E12A90004321A2 /* ViewExtensions.swift */; };
 		79C5617527DFC29E00269C72 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 79C5617427DFC29E00269C72 /* AppDelegate.swift */; };
@@ -37,6 +40,9 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		792215E827E27A1800E72ABA /* DetailCrewView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DetailCrewView.swift; sourceTree = "<group>"; };
+		792215EA27E27AF900E72ABA /* CrewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CrewModel.swift; sourceTree = "<group>"; };
+		792215EC27E27F3E00E72ABA /* DetailCrewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DetailCrewCell.swift; sourceTree = "<group>"; };
 		79B6E10327E12A90004321A2 /* ViewExtensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewExtensions.swift; sourceTree = "<group>"; };
 		79C5617127DFC29E00269C72 /* SpaceXapp.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = SpaceXapp.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		79C5617427DFC29E00269C72 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
@@ -100,12 +106,12 @@
 			children = (
 				79C5617427DFC29E00269C72 /* AppDelegate.swift */,
 				79C5617627DFC29E00269C72 /* SceneDelegate.swift */,
+				79C5618C27DFC2C400269C72 /* Networking */,
 				79F6380327E25463003C2A94 /* Storage */,
 				79C5618E27DFC2C400269C72 /* Modules */,
 				79C561BE27DFC54600269C72 /* Model */,
 				79C5619827DFC2C400269C72 /* Common */,
 				79C5619C27DFC2C400269C72 /* Extensions */,
-				79C5618C27DFC2C400269C72 /* Networking */,
 				79C5617F27DFC29F00269C72 /* LaunchScreen.storyboard */,
 				79C561C327DFC64300269C72 /* Assets.xcassets */,
 				79C5618827DFC2C400269C72 /* Main.storyboard */,
@@ -138,6 +144,8 @@
 				79C5619727DFC2C400269C72 /* DetailInfoView.swift */,
 				79C5619127DFC2C400269C72 /* DetailViewModel.swift */,
 				79F6380127E23894003C2A94 /* DetailGaleryView.swift */,
+				792215EC27E27F3E00E72ABA /* DetailCrewCell.swift */,
+				792215E827E27A1800E72ABA /* DetailCrewView.swift */,
 			);
 			path = Detail;
 			sourceTree = "<group>";
@@ -178,6 +186,7 @@
 			isa = PBXGroup;
 			children = (
 				79C561BF27DFC55A00269C72 /* FlightModel.swift */,
+				792215EA27E27AF900E72ABA /* CrewModel.swift */,
 				79F6380627E25B22003C2A94 /* ImageObject.swift */,
 				79C561C127DFC5B700269C72 /* NetworkingError.swift */,
 			);
@@ -276,8 +285,10 @@
 				79C5617527DFC29E00269C72 /* AppDelegate.swift in Sources */,
 				79F6380727E25B22003C2A94 /* ImageObject.swift in Sources */,
 				79F6380227E23894003C2A94 /* DetailGaleryView.swift in Sources */,
+				792215ED27E27F3E00E72ABA /* DetailCrewCell.swift in Sources */,
 				79C561B627DFC2C400269C72 /* UIImageExtensions.swift in Sources */,
 				79C561AF27DFC2C400269C72 /* DetailInfoView.swift in Sources */,
+				792215E927E27A1800E72ABA /* DetailCrewView.swift in Sources */,
 				79C561C227DFC5B700269C72 /* NetworkingError.swift in Sources */,
 				79C561B127DFC2C400269C72 /* BaseViewModel.swift in Sources */,
 				79C561B427DFC2C400269C72 /* UIViewControllerExtension.swift in Sources */,
@@ -290,6 +301,7 @@
 				79C561AE27DFC2C400269C72 /* MainCollectionViewCell.swift in Sources */,
 				79C561AB27DFC2C400269C72 /* ViewController.swift in Sources */,
 				79C561B227DFC2C400269C72 /* BaseView.swift in Sources */,
+				792215EB27E27AF900E72ABA /* CrewModel.swift in Sources */,
 				79C561B527DFC2C400269C72 /* CustomColors.swift in Sources */,
 				79C561C027DFC55A00269C72 /* FlightModel.swift in Sources */,
 				79C561AC27DFC2C400269C72 /* MainViewModel.swift in Sources */,

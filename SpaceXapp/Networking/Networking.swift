@@ -26,7 +26,6 @@ class Networking {
         
     }
     
-    
     func fetchImagefrom(_ url: URL,_ completion: @escaping(Result<Data,NetworkingError>)->() ) {
         AF.request(url).response { response in
             guard let data = response.data else {
@@ -34,6 +33,22 @@ class Networking {
                 return
             }
             completion(.success(data))
+        }
+    }
+    
+    func getCrewMember(with id: String,_ completion: @escaping(Result<Crew,NetworkingError>)->()) {
+        let url = URL(string: "https://api.spacexdata.com/v4/crew/" + id)!
+        AF.request(url).response { response in
+            guard let data = response.data else {
+                completion(.failure(.requestError))
+                return
+            }
+            
+            guard let decodedData = try? JSONDecoder().decode(Crew.self, from: data) else {
+                return completion(.failure(.decodingError))
+            }
+            
+            completion(.success(decodedData))
         }
     }
 }
