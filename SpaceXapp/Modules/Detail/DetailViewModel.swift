@@ -42,6 +42,7 @@ class DetailViewModel: BaseViewModel, ObservableObject {
         
         downloadImages(links: data.links.images.original)
         
+        print(data.crew)
         getCrew(ids: data.crew)
     }
 
@@ -92,11 +93,11 @@ class DetailViewModel: BaseViewModel, ObservableObject {
 //MARK: - DetailCrewView datasource
 extension DetailViewModel {
     func updateCrewData() {
-        snapshot?.deleteAllItems()
-        snapshot?.appendSections([.main])
+        snapshot.deleteAllItems()
+        snapshot.appendSections([.main])
         
         let array = crew.map{ $0.id }
-        snapshot?.appendItems(array, toSection: .main)
+        snapshot.appendItems(array, toSection: .main)
         crewDatasource?.apply(snapshot, animatingDifferences: true)
     }
 }

@@ -7,16 +7,12 @@
 
 import UIKit
 
-class DetailCrewView: BaseViewController {
+class DetailCrewView: BaseView {
     
     lazy var crewCollectionView: UICollectionView = {
         let collectionView = UICollectionView(frame: .zero, collectionViewLayout: createLayout())
         return collectionView
     }()
-    
-    override func viewDidLoad() {
-        crewCollectionView.register(DetailCrewCell.self, forCellWithReuseIdentifier: DetailCrewCell.identifier)
-    }
     
     func createLayout() -> UICollectionViewCompositionalLayout {
         let layout = UICollectionViewCompositionalLayout {
@@ -42,9 +38,19 @@ class DetailCrewView: BaseViewController {
         }
         return layout
     }
+
+    override func addViews() {
+        addSubview(crewCollectionView)
+    }
+    
+    override func addConstraints() {
+        crewCollectionView.sameConstrainghts(as: self)
+    }
     
     func createDataSource() {
         guard let viewModel = viewModel as? DetailViewModel else { return }
+        
+        crewCollectionView.register(DetailCrewCell.self, forCellWithReuseIdentifier: DetailCrewCell.identifier)
         
         viewModel.crewDatasource = .init(collectionView: crewCollectionView) {
             collectionView, indexPath, itemIdentifier in

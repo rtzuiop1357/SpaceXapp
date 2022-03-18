@@ -10,10 +10,13 @@ import UIKit
 
 class BaseView: UIView {
 
-    init() {
+    weak var viewModel: BaseViewModel? = nil
+    
+    init(viewModel: BaseViewModel? = nil) {
         super.init(frame: .zero)
         addViews()
         addConstraints()
+        self.viewModel = viewModel
     }
     
     required init?(coder: NSCoder) {

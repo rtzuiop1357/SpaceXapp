@@ -29,6 +29,12 @@ class DetailViewController: BaseViewController {
         return vc
     }()
     
+    lazy var crewView: DetailCrewView = {
+       let crewView = DetailCrewView(viewModel: viewModel)
+        crewView.translatesAutoresizingMaskIntoConstraints = false
+        return crewView
+    }()
+    
     lazy var stackView: UIStackView = {
         let view = UIStackView()
         view.axis = .vertical
@@ -42,6 +48,7 @@ class DetailViewController: BaseViewController {
         // Do any additional setup after loading the view.
         view.backgroundColor = Colors.bg
         navigationController?.navigationBar.prefersLargeTitles = false
+        crewView.createDataSource()
     }
 
     init(flight: Flight, viewModel: BaseViewModel) {
@@ -57,6 +64,7 @@ class DetailViewController: BaseViewController {
         scrollView.addSubview(stackView)
         stackView.addSubview(galeryCollectionView.view)
         stackView.addSubview(detailInfoView)
+        stackView.addSubview(crewView)
     }
     
     override func addConstrainghts() {
@@ -73,7 +81,13 @@ class DetailViewController: BaseViewController {
             detailInfoView.leftAnchor.constraint(equalTo: stackView.leftAnchor),
             detailInfoView.rightAnchor.constraint(equalTo: stackView.rightAnchor),
             detailInfoView.widthAnchor.constraint(equalTo: stackView.widthAnchor),
-            detailInfoView.bottomAnchor.constraint(equalTo: stackView.bottomAnchor)
+            
+            crewView.topAnchor.constraint(equalTo: detailInfoView.bottomAnchor, constant: 5),
+            crewView.leftAnchor.constraint(equalTo: stackView.leftAnchor),
+            crewView.rightAnchor.constraint(equalTo: stackView.rightAnchor),
+            crewView.bottomAnchor.constraint(equalTo: stackView.bottomAnchor),
+            crewView.widthAnchor.constraint(equalTo: stackView.widthAnchor),
+            crewView.heightAnchor.constraint(equalToConstant: 150)
         ])
     }
     

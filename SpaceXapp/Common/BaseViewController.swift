@@ -21,6 +21,12 @@ class BaseViewController: UIViewController {
         self.viewModel?.configure(data: data)
     }
     
+    init(viewModel: BaseViewModel? = nil) {
+        super.init(nibName: nil, bundle: nil)
+        self.viewModel = viewModel
+        self.setUpBindings()
+    }
+    
     required init?(coder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
     }

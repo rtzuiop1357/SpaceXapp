@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		7908029C27E50E2500AC9436 /* BaseCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7908029B27E50E2500AC9436 /* BaseCell.swift */; };
 		792215E927E27A1800E72ABA /* DetailCrewView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 792215E827E27A1800E72ABA /* DetailCrewView.swift */; };
 		792215EB27E27AF900E72ABA /* CrewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 792215EA27E27AF900E72ABA /* CrewModel.swift */; };
 		792215ED27E27F3E00E72ABA /* DetailCrewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 792215EC27E27F3E00E72ABA /* DetailCrewCell.swift */; };
@@ -40,6 +41,7 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		7908029B27E50E2500AC9436 /* BaseCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BaseCell.swift; sourceTree = "<group>"; };
 		792215E827E27A1800E72ABA /* DetailCrewView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DetailCrewView.swift; sourceTree = "<group>"; };
 		792215EA27E27AF900E72ABA /* CrewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CrewModel.swift; sourceTree = "<group>"; };
 		792215EC27E27F3E00E72ABA /* DetailCrewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DetailCrewCell.swift; sourceTree = "<group>"; };
@@ -166,6 +168,7 @@
 				79C5619927DFC2C400269C72 /* BaseViewController.swift */,
 				79C5619A27DFC2C400269C72 /* BaseViewModel.swift */,
 				79C5619B27DFC2C400269C72 /* BaseView.swift */,
+				7908029B27E50E2500AC9436 /* BaseCell.swift */,
 			);
 			path = Common;
 			sourceTree = "<group>";
@@ -298,6 +301,7 @@
 				79C561A927DFC2C400269C72 /* DetailViewController.swift in Sources */,
 				79B6E10427E12A90004321A2 /* ViewExtensions.swift in Sources */,
 				79C5617727DFC29E00269C72 /* SceneDelegate.swift in Sources */,
+				7908029C27E50E2500AC9436 /* BaseCell.swift in Sources */,
 				79C561AE27DFC2C400269C72 /* MainCollectionViewCell.swift in Sources */,
 				79C561AB27DFC2C400269C72 /* ViewController.swift in Sources */,
 				79C561B227DFC2C400269C72 /* BaseView.swift in Sources */,
