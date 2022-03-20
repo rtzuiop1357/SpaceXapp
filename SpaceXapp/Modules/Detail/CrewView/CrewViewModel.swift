@@ -26,6 +26,7 @@ class CrewViewModel: BaseViewModel {
                 switch res {
                 case.success(let member):
                     self.crew.append(member)
+                    self.getImage(for: member.image, id: member.id)
                     self.updateCrewData()
                 case .failure(let err):
                     print(err)
@@ -34,7 +35,7 @@ class CrewViewModel: BaseViewModel {
         }
     }
     
-    func getImage(for link: String) {
+    func getImage(for link: String, id: Crew.ID) {
         if ImageStorage.shared.getImage(for: link) != nil {
             updateCrewData()
         }else{
@@ -47,12 +48,17 @@ class CrewViewModel: BaseViewModel {
                     else { return }
                     ImageStorage.shared.store(image, for: link)
                     
-                    self.updateCrewData()
+                    self.reloadItems(id: id)
                 case .failure(let err):
                     print(err)
                 }
             }
         }
+    }
+    
+    func reloadItems(id: Crew.ID) {
+        snapshot.reloadItems([id])
+        crewDatasource?.apply(snapshot)
     }
     
     func updateCrewData() {

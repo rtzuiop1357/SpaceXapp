@@ -85,12 +85,13 @@ class DetailViewController: BaseViewController {
             detailInfoView.rightAnchor.constraint(equalTo: stackView.rightAnchor),
             detailInfoView.widthAnchor.constraint(equalTo: stackView.widthAnchor),
             
-            crewView.view.topAnchor.constraint(equalTo: detailInfoView.bottomAnchor, constant: 5),
+            crewView.view.topAnchor.constraint(equalTo: detailInfoView.bottomAnchor,
+                                               constant: 5),
             crewView.view.leftAnchor.constraint(equalTo: stackView.leftAnchor),
             crewView.view.rightAnchor.constraint(equalTo: stackView.rightAnchor),
             crewView.view.bottomAnchor.constraint(equalTo: stackView.bottomAnchor),
             crewView.view.widthAnchor.constraint(equalTo: stackView.widthAnchor),
-            crewView.view.heightAnchor.constraint(equalToConstant: 300)
+            crewView.view.heightAnchor.constraint(equalToConstant: 330)
         ])
     }
     
