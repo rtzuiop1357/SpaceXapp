@@ -60,7 +60,6 @@ class DetailInfoView: BaseView {
     override func addViews() {
         addSubview(stackView)
 
-        //stackView.addSubview(mainImageView)
         stackView.addSubview(nameLabel)
         stackView.addSubview(detailLabel)
         stackView.addSubview(failiureLabel)

@@ -209,7 +209,7 @@ extension ViewController: UISearchControllerDelegate, UISearchResultsUpdating, U
         // the code was running too fast so the collection view didnot have enought
         // time to update itself so i added this delay that gives it enought time to
         // render so it doesn't crash...
-        DispatchQueue.main.asyncAfter(deadline: .now() + 0.5) {
+        DispatchQueue.main.asyncAfter(deadline: .now() + 1) {
             guard text == searchController.searchBar.text else { return }
             
             self.viewModel.search(text: text)

@@ -27,6 +27,12 @@ class BaseViewController: UIViewController {
         self.setUpBindings()
     }
     
+    /// override if you use init(viewModel: BaseViewModel? = nil) must be caled from the view Controller that presents this controller
+    /// or you can use it to reconfigure ViewModel
+    func configure<T>(data: T) {
+        self.viewModel?.configure(data: data)
+    }
+    
     required init?(coder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
     }

@@ -10,6 +10,8 @@ import UIKit
 class Networking {
     static let shared = Networking()
     
+    var activeImageRequests: Set<String> = []
+    
     func getFlightsData(_ completion: @escaping (Result<[Flight],NetworkingError>)->()){
         
         let url = URL(string: "https://api.spacexdata.com/v4/launches/")!
@@ -27,12 +29,17 @@ class Networking {
     }
     
     func fetchImagefrom(_ url: URL,_ completion: @escaping(Result<Data,NetworkingError>)->() ) {
+        guard !activeImageRequests.contains(url.absoluteString) else { return }
+        activeImageRequests.insert(url.absoluteString)
+        
         AF.request(url).response { response in
             guard let data = response.data else {
                 completion(.failure(.errorFetchingImage))
+                self.activeImageRequests.remove(url.absoluteString)
                 return
             }
             completion(.success(data))
+            self.activeImageRequests.remove(url.absoluteString)
         }
     }
     

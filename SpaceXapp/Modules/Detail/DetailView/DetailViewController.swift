@@ -29,9 +29,9 @@ class DetailViewController: BaseViewController {
         return vc
     }()
     
-    lazy var crewView: DetailCrewView = {
-       let crewView = DetailCrewView(viewModel: viewModel)
-        crewView.translatesAutoresizingMaskIntoConstraints = false
+    lazy var crewView: DetailCrewViewController = {
+       let crewView = DetailCrewViewController(viewModel: CrewViewModel())
+        crewView.view.translatesAutoresizingMaskIntoConstraints = false
         return crewView
     }()
     
@@ -53,6 +53,9 @@ class DetailViewController: BaseViewController {
 
     init(flight: Flight, viewModel: BaseViewModel) {
         super.init(data: flight, viewModel: viewModel)
+        
+        //configuring crewView viewModel
+        crewView.configure(data: flight.crew)
     }
     
     required init?(coder: NSCoder) {
@@ -64,7 +67,7 @@ class DetailViewController: BaseViewController {
         scrollView.addSubview(stackView)
         stackView.addSubview(galeryCollectionView.view)
         stackView.addSubview(detailInfoView)
-        stackView.addSubview(crewView)
+        stackView.addSubview(crewView.view)
     }
     
     override func addConstrainghts() {
@@ -82,12 +85,12 @@ class DetailViewController: BaseViewController {
             detailInfoView.rightAnchor.constraint(equalTo: stackView.rightAnchor),
             detailInfoView.widthAnchor.constraint(equalTo: stackView.widthAnchor),
             
-            crewView.topAnchor.constraint(equalTo: detailInfoView.bottomAnchor, constant: 5),
-            crewView.leftAnchor.constraint(equalTo: stackView.leftAnchor),
-            crewView.rightAnchor.constraint(equalTo: stackView.rightAnchor),
-            crewView.bottomAnchor.constraint(equalTo: stackView.bottomAnchor),
-            crewView.widthAnchor.constraint(equalTo: stackView.widthAnchor),
-            crewView.heightAnchor.constraint(equalToConstant: 150)
+            crewView.view.topAnchor.constraint(equalTo: detailInfoView.bottomAnchor, constant: 5),
+            crewView.view.leftAnchor.constraint(equalTo: stackView.leftAnchor),
+            crewView.view.rightAnchor.constraint(equalTo: stackView.rightAnchor),
+            crewView.view.bottomAnchor.constraint(equalTo: stackView.bottomAnchor),
+            crewView.view.widthAnchor.constraint(equalTo: stackView.widthAnchor),
+            crewView.view.heightAnchor.constraint(equalToConstant: 300)
         ])
     }
     

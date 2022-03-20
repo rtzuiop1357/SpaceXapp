@@ -8,7 +8,8 @@
 
 /* Begin PBXBuildFile section */
 		7908029C27E50E2500AC9436 /* BaseCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7908029B27E50E2500AC9436 /* BaseCell.swift */; };
-		792215E927E27A1800E72ABA /* DetailCrewView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 792215E827E27A1800E72ABA /* DetailCrewView.swift */; };
+		791CB4AE27E7ABCD009F23CE /* CrewViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 791CB4AD27E7ABCD009F23CE /* CrewViewModel.swift */; };
+		792215E927E27A1800E72ABA /* DetailCrewViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 792215E827E27A1800E72ABA /* DetailCrewViewController.swift */; };
 		792215EB27E27AF900E72ABA /* CrewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 792215EA27E27AF900E72ABA /* CrewModel.swift */; };
 		792215ED27E27F3E00E72ABA /* DetailCrewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 792215EC27E27F3E00E72ABA /* DetailCrewCell.swift */; };
 		79B6E0FE27E125A6004321A2 /* Swinject in Frameworks */ = {isa = PBXBuildFile; productRef = 79B6E0FD27E125A6004321A2 /* Swinject */; };
@@ -42,7 +43,8 @@
 
 /* Begin PBXFileReference section */
 		7908029B27E50E2500AC9436 /* BaseCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BaseCell.swift; sourceTree = "<group>"; };
-		792215E827E27A1800E72ABA /* DetailCrewView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DetailCrewView.swift; sourceTree = "<group>"; };
+		791CB4AD27E7ABCD009F23CE /* CrewViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CrewViewModel.swift; sourceTree = "<group>"; };
+		792215E827E27A1800E72ABA /* DetailCrewViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DetailCrewViewController.swift; sourceTree = "<group>"; };
 		792215EA27E27AF900E72ABA /* CrewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CrewModel.swift; sourceTree = "<group>"; };
 		792215EC27E27F3E00E72ABA /* DetailCrewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DetailCrewCell.swift; sourceTree = "<group>"; };
 		79B6E10327E12A90004321A2 /* ViewExtensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewExtensions.swift; sourceTree = "<group>"; };
@@ -87,6 +89,27 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		791CB4AF27E7ABD4009F23CE /* CrewView */ = {
+			isa = PBXGroup;
+			children = (
+				792215EC27E27F3E00E72ABA /* DetailCrewCell.swift */,
+				792215E827E27A1800E72ABA /* DetailCrewViewController.swift */,
+				791CB4AD27E7ABCD009F23CE /* CrewViewModel.swift */,
+			);
+			path = CrewView;
+			sourceTree = "<group>";
+		};
+		791CB4B027E7ACEE009F23CE /* DetailView */ = {
+			isa = PBXGroup;
+			children = (
+				79C5619027DFC2C400269C72 /* DetailViewController.swift */,
+				79C5619727DFC2C400269C72 /* DetailInfoView.swift */,
+				79C5619127DFC2C400269C72 /* DetailViewModel.swift */,
+				79F6380127E23894003C2A94 /* DetailGaleryView.swift */,
+			);
+			path = DetailView;
+			sourceTree = "<group>";
+		};
 		79C5616827DFC29E00269C72 = {
 			isa = PBXGroup;
 			children = (
@@ -142,12 +165,8 @@
 		79C5618F27DFC2C400269C72 /* Detail */ = {
 			isa = PBXGroup;
 			children = (
-				79C5619027DFC2C400269C72 /* DetailViewController.swift */,
-				79C5619727DFC2C400269C72 /* DetailInfoView.swift */,
-				79C5619127DFC2C400269C72 /* DetailViewModel.swift */,
-				79F6380127E23894003C2A94 /* DetailGaleryView.swift */,
-				792215EC27E27F3E00E72ABA /* DetailCrewCell.swift */,
-				792215E827E27A1800E72ABA /* DetailCrewView.swift */,
+				791CB4B027E7ACEE009F23CE /* DetailView */,
+				791CB4AF27E7ABD4009F23CE /* CrewView */,
 			);
 			path = Detail;
 			sourceTree = "<group>";
@@ -166,8 +185,8 @@
 			isa = PBXGroup;
 			children = (
 				79C5619927DFC2C400269C72 /* BaseViewController.swift */,
-				79C5619A27DFC2C400269C72 /* BaseViewModel.swift */,
 				79C5619B27DFC2C400269C72 /* BaseView.swift */,
+				79C5619A27DFC2C400269C72 /* BaseViewModel.swift */,
 				7908029B27E50E2500AC9436 /* BaseCell.swift */,
 			);
 			path = Common;
@@ -291,7 +310,7 @@
 				792215ED27E27F3E00E72ABA /* DetailCrewCell.swift in Sources */,
 				79C561B627DFC2C400269C72 /* UIImageExtensions.swift in Sources */,
 				79C561AF27DFC2C400269C72 /* DetailInfoView.swift in Sources */,
-				792215E927E27A1800E72ABA /* DetailCrewView.swift in Sources */,
+				792215E927E27A1800E72ABA /* DetailCrewViewController.swift in Sources */,
 				79C561C227DFC5B700269C72 /* NetworkingError.swift in Sources */,
 				79C561B127DFC2C400269C72 /* BaseViewModel.swift in Sources */,
 				79C561B427DFC2C400269C72 /* UIViewControllerExtension.swift in Sources */,
@@ -309,6 +328,7 @@
 				79C561B527DFC2C400269C72 /* CustomColors.swift in Sources */,
 				79C561C027DFC55A00269C72 /* FlightModel.swift in Sources */,
 				79C561AC27DFC2C400269C72 /* MainViewModel.swift in Sources */,
+				791CB4AE27E7ABCD009F23CE /* CrewViewModel.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
