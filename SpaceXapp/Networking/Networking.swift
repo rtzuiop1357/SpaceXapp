@@ -25,7 +25,6 @@ class Networking {
             }
             completion(.success(decodedData))
         }
-        
     }
     
     func fetchImagefrom(_ url: URL,_ completion: @escaping(Result<Data,NetworkingError>)->() ) {

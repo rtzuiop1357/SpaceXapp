@@ -66,9 +66,7 @@ class MainCollectionViewCell: UITableViewCell {
             dateLabel.topAnchor.constraint(equalTo: nameLabel.bottomAnchor, constant: 7)
          ])
     }
-    
-    
-    
+
     func setupViews() {
         addSubview(mainImageView)
         addSubview(nameLabel)

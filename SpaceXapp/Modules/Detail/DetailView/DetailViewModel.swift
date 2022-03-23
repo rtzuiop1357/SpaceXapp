@@ -42,7 +42,7 @@ class DetailViewModel: BaseViewModel, ObservableObject {
         }
         
         for link in links {
-            if let image = ImageStorage.shared.getRocketImage(for: link) {
+            if let image = ImageStorage.shared.getImageObject(for: link) {
                 images.append(image)
             }else{
                 let url = URL(string: link)!

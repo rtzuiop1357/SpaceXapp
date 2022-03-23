@@ -22,14 +22,16 @@ class DetailCrewCell: BaseCell {
     lazy var nameLabel: UILabel = {
         let view = UILabel()
         view.translatesAutoresizingMaskIntoConstraints = false
-        view.font = .preferredFont(forTextStyle: .headline)
+        view.font = .preferredFont(forTextStyle: .body)
+        view.lineBreakMode = .byWordWrapping
+        view.numberOfLines = 0
         return view
     }()
     
     lazy var agencyLabel: UILabel = {
         let view = UILabel()
         view.translatesAutoresizingMaskIntoConstraints = false
-        view.font = .preferredFont(forTextStyle: .body)
+        view.font = .preferredFont(forTextStyle: .callout)
         return view
     }()
     
@@ -38,7 +40,6 @@ class DetailCrewCell: BaseCell {
         imageView.layer.cornerRadius = imageView.frame.width / 2
     }
     
-    //TODO: UI + configure method
     override func configure<T>(data: T) {
         guard let crew = data as? Crew else { return }
         nameLabel.text = crew.name

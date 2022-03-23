@@ -12,6 +12,7 @@ class DetailCrewViewController: BaseViewController {
     lazy var crewCollectionView: UICollectionView = {
         let collectionView = UICollectionView(frame: .zero, collectionViewLayout: createLayout())
         collectionView.translatesAutoresizingMaskIntoConstraints = false
+        collectionView.showsVerticalScrollIndicator = false
         return collectionView
     }()
     
@@ -19,6 +20,7 @@ class DetailCrewViewController: BaseViewController {
         super.init(viewModel: viewModel)
         createDataSource()
     }
+    
     override init<T>(data: T, viewModel: BaseViewModel? = nil) {
         super.init(data: data, viewModel: viewModel)
         createDataSource()
@@ -31,7 +33,7 @@ class DetailCrewViewController: BaseViewController {
     func createLayout() -> UICollectionViewLayout {
         let layout = UICollectionViewFlowLayout()
         layout.scrollDirection = .horizontal
-        layout.itemSize = CGSize(width: 300, height: 300)
+        layout.itemSize = CGSize(width: 200, height: 200)
         layout.sectionInset = UIEdgeInsets(top: 0, left: 20, bottom: 50, right: 0)
         return layout
     }

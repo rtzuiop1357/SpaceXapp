@@ -44,7 +44,7 @@ class CrewViewModel: BaseViewModel {
                 switch res {
                 case.success(let data):
                     guard let image = UIImage(data: data)?
-                            .scalePreservingAspectRatio(targetSize: UIScreen.main.bounds.size)
+                            .scalePreservingAspectRatio(targetSize: CGSize(width: 250, height: 250))
                     else { return }
                     ImageStorage.shared.store(image, for: link)
                     
@@ -67,9 +67,7 @@ class CrewViewModel: BaseViewModel {
         
         let array = crew.map{ $0.id }
         snapshot.appendItems(array, toSection: .main)
-        
-        print(crew)
-        
+
         crewDatasource!.apply(snapshot, animatingDifferences: true)
     }
 }

@@ -26,7 +26,13 @@ class MainViewModel: BaseViewModel {
     var dataSource: UITableViewDiffableDataSource<Section,Flight.ID>? = nil
     var snapshot = NSDiffableDataSourceSnapshot<Section,Flight.ID>()
     
-    override init() {
+    let isFavouriteVC: Bool
+    @Published var favourite: [Flight]
+    
+    init(isFavourite: Bool) {
+        self.isFavouriteVC = isFavourite
+        
+        self.favourite = MainViewModel.getFovourites()
         super.init()
         
         filterByImage = UserDefaults.standard.bool(forKey: UserDefaultsKeys.image.rawValue)
@@ -43,9 +49,14 @@ class MainViewModel: BaseViewModel {
         let filter2: (Flight)->(Bool) = {
             return !$0.links.images.original.isEmpty && $0.name.lowercased().contains(text.lowercased())
         }
-        
-        searchCollectionOfFlights = idsOfFlights.filter {
-            return filterByImage ? filter2($0) : filter1($0)
+        if isFavouriteVC {
+            searchCollectionOfFlights = idsOfFlights.filter {
+                return filterByImage ? filter2($0) : filter1($0)
+            }
+        }else {
+            searchCollectionOfFlights = favourite.filter {
+                return filterByImage ? filter2($0) : filter1($0)
+            }
         }
         
         snapshot.deleteAllItems()
@@ -57,13 +68,13 @@ class MainViewModel: BaseViewModel {
         dataSource?.apply(snapshot, animatingDifferences: true)
     }
     
-    
     func clearSearch() {
         updateData(sort: false)
     }
     
     func updateData(sort: Bool) {
-        let flight = idsOfFlights
+        let flight = isFavouriteVC ? favourite : idsOfFlights
+        
         idsOfFlights = []
         searchCollectionOfFlights = []
         
@@ -99,7 +110,8 @@ class MainViewModel: BaseViewModel {
             case .success(let data):
                 let size = UIScreen.main.bounds.size
                 
-                //after the image is recived this code recieves it and tels the cell where it belongs to rerender
+                //after the image is recived this code recieves it and tels the cell
+                //where it belongs to rerender
                 if let image = UIImage(data: data)?
                     .scalePreservingAspectRatio(targetSize: size) {
                     self.imageStorage.store(image, for: link)
@@ -147,5 +159,12 @@ class MainViewModel: BaseViewModel {
                 print("\(Date()) - failiure: \(error)")
             }
         }
+    }
+    
+    static func getFovourites() -> [Flight] {
+        guard let data = UserDefaults.standard
+                .data(forKey: UserDefaultsKeys.favourite.rawValue) else { return [] }
+        return (try? JSONDecoder().decode([Flight].self, from: data) ) ?? []
+        
     }
 }

@@ -43,19 +43,27 @@ class DetailViewController: BaseViewController {
         return view
     }()
     
+    let hasCrew: Bool
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         // Do any additional setup after loading the view.
         view.backgroundColor = Colors.bg
         navigationController?.navigationBar.prefersLargeTitles = false
-        crewView.createDataSource()
+        if hasCrew {
+            crewView.createDataSource()
+        }
     }
 
-    init(flight: Flight, viewModel: BaseViewModel) {
+    init(flight: Flight, hasCrew: Bool, viewModel: BaseViewModel) {
+        self.hasCrew = hasCrew
+        
         super.init(data: flight, viewModel: viewModel)
         
         //configuring crewView viewModel
-        crewView.configure(data: flight.crew)
+        if hasCrew {
+            crewView.configure(data: flight.crew)
+        }
     }
     
     required init?(coder: NSCoder) {
@@ -91,8 +99,14 @@ class DetailViewController: BaseViewController {
             crewView.view.rightAnchor.constraint(equalTo: stackView.rightAnchor),
             crewView.view.bottomAnchor.constraint(equalTo: stackView.bottomAnchor),
             crewView.view.widthAnchor.constraint(equalTo: stackView.widthAnchor),
-            crewView.view.heightAnchor.constraint(equalToConstant: 330)
         ])
+        
+        if hasCrew {
+            crewView.view.heightAnchor.constraint(equalToConstant: 240).isActive = true
+        }else{
+            crewView.view.heightAnchor.constraint(equalToConstant: 0).isActive = true
+        }
+        
     }
     
     override func setUpBindings() {

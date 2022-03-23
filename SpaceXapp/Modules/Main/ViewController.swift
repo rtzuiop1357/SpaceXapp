@@ -15,10 +15,9 @@ enum Section {
 class ViewController: UIViewController {
     
     //MARK: - ViewModel
-    let viewModel = MainViewModel()
+    let viewModel: MainViewModel
     var subscriptons: Set<AnyCancellable> = []
-    
-    
+
     //MARK: -  UI elements
     lazy var mainTableView: UITableView = {
         let collectionView = UITableView(frame: .zero)
@@ -37,6 +36,17 @@ class ViewController: UIViewController {
         return sc
     }()
     
+    init(viewModel: BaseViewModel) {
+        guard let viewModel = viewModel as? MainViewModel else { fatalError() }
+        self.viewModel = viewModel
+        
+        super.init(nibName: nil, bundle: nil)
+    }
+    
+    required init?(coder: NSCoder) {
+        fatalError("init(coder:) has not been implemented")
+    }
+    
     //MARK: - LifeCycle methods
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -45,6 +55,8 @@ class ViewController: UIViewController {
         
         //navigationBar setup
         navigationController?.navigationBar.prefersLargeTitles = true
+        navigationItem.title = "SpaceX"
+        
         addRefreshGesture()
         navigationItem.searchController = searchController
         
@@ -109,8 +121,8 @@ extension ViewController {
     
     func addRefreshGesture() {
         mainTableView.refreshControl = UIRefreshControl()
-        mainTableView.refreshControl?.addTarget(self, action:
-                                                    #selector(handleRefresh),
+        mainTableView.refreshControl?.addTarget(self,
+                                                action: #selector(handleRefresh),
                                                 for: .valueChanged)
     }
     
@@ -130,7 +142,8 @@ extension ViewController: UITableViewDelegate {
         let flight = viewModel.searchCollectionOfFlights[indexPath.row]
         tableView.deselectRow(at: indexPath, animated: true)
         
-        let vc = DetailViewController(flight: flight, viewModel: DetailViewModel())
+        let hasCrew = !flight.crew.isEmpty
+        let vc = DetailViewController(flight: flight, hasCrew: hasCrew, viewModel: DetailViewModel())
         
         navigationController?.pushViewController(vc, animated: true)
     }
@@ -160,6 +173,8 @@ extension ViewController {
             let cell = tableView.dequeueReusableCell(
                 withIdentifier: "cell",
                 for: indexPath) as! MainCollectionViewCell
+            
+            guard self.viewModel.searchCollectionOfFlights.count > indexPath.row else { return cell }
             
             let flight = self.viewModel.searchCollectionOfFlights[indexPath.row]
             //checking if the flight object has images in it
@@ -191,7 +206,10 @@ extension ViewController {
     }
 }
  //MARK: - Searchbar related methods
-extension ViewController: UISearchControllerDelegate, UISearchResultsUpdating, UISearchBarDelegate {
+extension ViewController: UISearchControllerDelegate,
+                          UISearchResultsUpdating,
+                          UISearchBarDelegate {
+    
     func updateSearchResults(for searchController: UISearchController) {
         mainTableView.refreshControl = nil
 
@@ -200,8 +218,6 @@ extension ViewController: UISearchControllerDelegate, UISearchResultsUpdating, U
         }
         //checking if text contains some letters
         guard text.replacingOccurrences(of: " ", with: "") != "" else {
-            //            searchCollectionOfFlights = idsOfFlights
-            //            self.updateMainCollectionView(dataArray: self.searchCollectionOfFlights, sort: false)
             viewModel.updateData(sort: true)
             return
         }
@@ -209,11 +225,11 @@ extension ViewController: UISearchControllerDelegate, UISearchResultsUpdating, U
         // the code was running too fast so the collection view didnot have enought
         // time to update itself so i added this delay that gives it enought time to
         // render so it doesn't crash...
-        DispatchQueue.main.asyncAfter(deadline: .now() + 1) {
-            guard text == searchController.searchBar.text else { return }
-            
+//        DispatchQueue.main.asyncAfter(deadline: .now() + 1) {
+//            guard text == searchController.searchBar.text else { return }
+//
             self.viewModel.search(text: text)
-        }
+//        }
     }
     
     func searchBarCancelButtonClicked(_ searchBar: UISearchBar) {

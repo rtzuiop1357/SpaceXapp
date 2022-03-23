@@ -25,7 +25,7 @@ class ImageStorage {
         return images[id]?.image
     }
     
-    public func getRocketImage(for id: String) -> ImageObject? {
+    public func getImageObject(for id: String) -> ImageObject? {
         return images[id]
     }
     
