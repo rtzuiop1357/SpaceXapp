@@ -22,7 +22,7 @@
 		79C561AA27DFC2C400269C72 /* DetailViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 79C5619127DFC2C400269C72 /* DetailViewModel.swift */; };
 		79C561AB27DFC2C400269C72 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 79C5619327DFC2C400269C72 /* ViewController.swift */; };
 		79C561AC27DFC2C400269C72 /* MainViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 79C5619427DFC2C400269C72 /* MainViewModel.swift */; };
-		79C561AE27DFC2C400269C72 /* MainCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 79C5619627DFC2C400269C72 /* MainCollectionViewCell.swift */; };
+		79C561AE27DFC2C400269C72 /* MainTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 79C5619627DFC2C400269C72 /* MainTableViewCell.swift */; };
 		79C561AF27DFC2C400269C72 /* DetailInfoView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 79C5619727DFC2C400269C72 /* DetailInfoView.swift */; };
 		79C561B027DFC2C400269C72 /* BaseViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 79C5619927DFC2C400269C72 /* BaseViewController.swift */; };
 		79C561B127DFC2C400269C72 /* BaseViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 79C5619A27DFC2C400269C72 /* BaseViewModel.swift */; };
@@ -38,7 +38,6 @@
 		79F6380227E23894003C2A94 /* DetailGaleryView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 79F6380127E23894003C2A94 /* DetailGaleryView.swift */; };
 		79F6380527E2547A003C2A94 /* ImageStorage.swift in Sources */ = {isa = PBXBuildFile; fileRef = 79F6380427E2547A003C2A94 /* ImageStorage.swift */; };
 		79F6380727E25B22003C2A94 /* ImageObject.swift in Sources */ = {isa = PBXBuildFile; fileRef = 79F6380627E25B22003C2A94 /* ImageObject.swift */; };
-		79FE450E27EA518800E0A8B6 /* MainNavigationView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 79FE450D27EA518800E0A8B6 /* MainNavigationView.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -58,7 +57,7 @@
 		79C5619127DFC2C400269C72 /* DetailViewModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DetailViewModel.swift; sourceTree = "<group>"; };
 		79C5619327DFC2C400269C72 /* ViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
 		79C5619427DFC2C400269C72 /* MainViewModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MainViewModel.swift; sourceTree = "<group>"; };
-		79C5619627DFC2C400269C72 /* MainCollectionViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MainCollectionViewCell.swift; sourceTree = "<group>"; };
+		79C5619627DFC2C400269C72 /* MainTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MainTableViewCell.swift; sourceTree = "<group>"; };
 		79C5619727DFC2C400269C72 /* DetailInfoView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DetailInfoView.swift; sourceTree = "<group>"; };
 		79C5619927DFC2C400269C72 /* BaseViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BaseViewController.swift; sourceTree = "<group>"; };
 		79C5619A27DFC2C400269C72 /* BaseViewModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BaseViewModel.swift; sourceTree = "<group>"; };
@@ -73,7 +72,6 @@
 		79F6380127E23894003C2A94 /* DetailGaleryView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DetailGaleryView.swift; sourceTree = "<group>"; };
 		79F6380427E2547A003C2A94 /* ImageStorage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImageStorage.swift; sourceTree = "<group>"; };
 		79F6380627E25B22003C2A94 /* ImageObject.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImageObject.swift; sourceTree = "<group>"; };
-		79FE450D27EA518800E0A8B6 /* MainNavigationView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainNavigationView.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -102,12 +100,36 @@
 		791CB4B027E7ACEE009F23CE /* DetailView */ = {
 			isa = PBXGroup;
 			children = (
-				79C5619027DFC2C400269C72 /* DetailViewController.swift */,
-				79C5619727DFC2C400269C72 /* DetailInfoView.swift */,
-				79C5619127DFC2C400269C72 /* DetailViewModel.swift */,
-				79F6380127E23894003C2A94 /* DetailGaleryView.swift */,
+				799FA42827ECF1EF00BC10AA /* ViewModel */,
+				799FA42627ECF1D600BC10AA /* ViewController */,
+				799FA42727ECF1E100BC10AA /* View */,
 			);
 			path = DetailView;
+			sourceTree = "<group>";
+		};
+		799FA42627ECF1D600BC10AA /* ViewController */ = {
+			isa = PBXGroup;
+			children = (
+				79C5619027DFC2C400269C72 /* DetailViewController.swift */,
+			);
+			path = ViewController;
+			sourceTree = "<group>";
+		};
+		799FA42727ECF1E100BC10AA /* View */ = {
+			isa = PBXGroup;
+			children = (
+				79F6380127E23894003C2A94 /* DetailGaleryView.swift */,
+				79C5619727DFC2C400269C72 /* DetailInfoView.swift */,
+			);
+			path = View;
+			sourceTree = "<group>";
+		};
+		799FA42827ECF1EF00BC10AA /* ViewModel */ = {
+			isa = PBXGroup;
+			children = (
+				79C5619127DFC2C400269C72 /* DetailViewModel.swift */,
+			);
+			path = ViewModel;
 			sourceTree = "<group>";
 		};
 		79C5616827DFC29E00269C72 = {
@@ -174,9 +196,8 @@
 			isa = PBXGroup;
 			children = (
 				79C5619327DFC2C400269C72 /* ViewController.swift */,
-				79C5619627DFC2C400269C72 /* MainCollectionViewCell.swift */,
+				79C5619627DFC2C400269C72 /* MainTableViewCell.swift */,
 				79C5619427DFC2C400269C72 /* MainViewModel.swift */,
-				79FE450D27EA518800E0A8B6 /* MainNavigationView.swift */,
 			);
 			path = Main;
 			sourceTree = "<group>";
@@ -320,11 +341,10 @@
 				79B6E10427E12A90004321A2 /* ViewExtensions.swift in Sources */,
 				79C5617727DFC29E00269C72 /* SceneDelegate.swift in Sources */,
 				7908029C27E50E2500AC9436 /* BaseCell.swift in Sources */,
-				79C561AE27DFC2C400269C72 /* MainCollectionViewCell.swift in Sources */,
+				79C561AE27DFC2C400269C72 /* MainTableViewCell.swift in Sources */,
 				79C561AB27DFC2C400269C72 /* ViewController.swift in Sources */,
 				79C561B227DFC2C400269C72 /* BaseView.swift in Sources */,
 				792215EB27E27AF900E72ABA /* CrewModel.swift in Sources */,
-				79FE450E27EA518800E0A8B6 /* MainNavigationView.swift in Sources */,
 				79C561B527DFC2C400269C72 /* CustomColors.swift in Sources */,
 				79C561C027DFC55A00269C72 /* FlightModel.swift in Sources */,
 				79C561AC27DFC2C400269C72 /* MainViewModel.swift in Sources */,
@@ -476,6 +496,7 @@
 				INFOPLIST_KEY_UILaunchStoryboardName = LaunchScreen;
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = "UIInterfaceOrientationPortrait UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
+				IPHONEOS_DEPLOYMENT_TARGET = 14.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
@@ -503,6 +524,7 @@
 				INFOPLIST_KEY_UILaunchStoryboardName = LaunchScreen;
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = "UIInterfaceOrientationPortrait UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
+				IPHONEOS_DEPLOYMENT_TARGET = 14.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",

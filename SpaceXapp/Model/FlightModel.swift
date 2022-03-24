@@ -28,7 +28,7 @@ struct Flight: Identifiable, Codable {
     //MARK: - Propeties
     let name: String
     private let date: String
-    
+        
     let details: String?
     let crew: [String]
     let success: Bool?

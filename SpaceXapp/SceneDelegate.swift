@@ -18,21 +18,10 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
         window = UIWindow(frame: windowScene.coordinateSpace.bounds)
         window?.windowScene = windowScene
         
+        let vc = ViewController(viewModel: MainViewModel())
+        let navVC = UINavigationController(rootViewController: vc)
         
-        let vc = ViewController(viewModel: MainViewModel(isFavourite: false))
-        vc.tabBarItem = UITabBarItem(tabBarSystemItem: .history, tag: 0)
-        let navVC = MainNavigationView(rootViewController: vc)
-        
-        let favVC = ViewController(viewModel: MainViewModel(isFavourite: true))
-        favVC.tabBarItem = UITabBarItem(tabBarSystemItem: .favorites, tag: 1)
-        let favNavVC = MainNavigationView(rootViewController: favVC)
-        
-        let vcs = [navVC, favNavVC]
-        
-        let tabController = UITabBarController()
-        tabController.setViewControllers(vcs, animated: false)
-        
-        window?.rootViewController = tabController
+        window?.rootViewController = navVC
         window?.makeKeyAndVisible()
     }
 }

@@ -12,7 +12,7 @@ class MainViewModel: BaseViewModel {
     
     var sorted = ComparisonResult.orderedDescending
     
-    private var idsOfFlights: [Flight] = []
+    fileprivate var idsOfFlights: [Flight] = []
     
     @Published var filterByImage: Bool = false
     
@@ -20,26 +20,21 @@ class MainViewModel: BaseViewModel {
     
     //custom image storage used for storing images that are shared between multiple views...
     let imageStorage = ImageStorage.shared
-    
-    var subscriptions: Set<AnyCancellable> = []
-    
+     
     var dataSource: UITableViewDiffableDataSource<Section,Flight.ID>? = nil
     var snapshot = NSDiffableDataSourceSnapshot<Section,Flight.ID>()
     
-    let isFavouriteVC: Bool
-    @Published var favourite: [Flight]
-    
-    init(isFavourite: Bool) {
-        self.isFavouriteVC = isFavourite
-        
-        self.favourite = MainViewModel.getFovourites()
+    override init() {
         super.init()
-        
+
         filterByImage = UserDefaults.standard.bool(forKey: UserDefaultsKeys.image.rawValue)
+    }
+    
+    func bind() {
         $filterByImage.sink { [unowned self] val in
             UserDefaults.standard.set(val, forKey: UserDefaultsKeys.image.rawValue)
             self.updateData(sort: true)
-        }.store(in: &subscriptions)
+        }.store(in: &cancellables)
     }
     
     func search(text: String) {
@@ -49,14 +44,9 @@ class MainViewModel: BaseViewModel {
         let filter2: (Flight)->(Bool) = {
             return !$0.links.images.original.isEmpty && $0.name.lowercased().contains(text.lowercased())
         }
-        if isFavouriteVC {
-            searchCollectionOfFlights = idsOfFlights.filter {
-                return filterByImage ? filter2($0) : filter1($0)
-            }
-        }else {
-            searchCollectionOfFlights = favourite.filter {
-                return filterByImage ? filter2($0) : filter1($0)
-            }
+        
+        searchCollectionOfFlights = idsOfFlights.filter {
+            return filterByImage ? filter2($0) : filter1($0)
         }
         
         snapshot.deleteAllItems()
@@ -73,7 +63,7 @@ class MainViewModel: BaseViewModel {
     }
     
     func updateData(sort: Bool) {
-        let flight = isFavouriteVC ? favourite : idsOfFlights
+        let flight = idsOfFlights
         
         idsOfFlights = []
         searchCollectionOfFlights = []
@@ -159,12 +149,5 @@ class MainViewModel: BaseViewModel {
                 print("\(Date()) - failiure: \(error)")
             }
         }
-    }
-    
-    static func getFovourites() -> [Flight] {
-        guard let data = UserDefaults.standard
-                .data(forKey: UserDefaultsKeys.favourite.rawValue) else { return [] }
-        return (try? JSONDecoder().decode([Flight].self, from: data) ) ?? []
-        
     }
 }

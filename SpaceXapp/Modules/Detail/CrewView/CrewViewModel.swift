@@ -44,7 +44,7 @@ class CrewViewModel: BaseViewModel {
                 switch res {
                 case.success(let data):
                     guard let image = UIImage(data: data)?
-                            .scalePreservingAspectRatio(targetSize: CGSize(width: 250, height: 250))
+                            .scalePreservingAspectRatio(targetSize: CGSize(width: 200, height: 200))
                     else { return }
                     ImageStorage.shared.store(image, for: link)
                     

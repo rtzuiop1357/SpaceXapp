@@ -4,7 +4,6 @@
 //
 //  Created by vojta on 17.02.2022.
 //
-
 import UIKit
 import Combine
 import SwiftUI
@@ -12,7 +11,7 @@ import SwiftUI
 class DetailViewController: BaseViewController {
     
     lazy var scrollView: UIScrollView = {
-       let scrollView = UIScrollView()
+        let scrollView = UIScrollView()
         scrollView.translatesAutoresizingMaskIntoConstraints = false
         return scrollView
     }()
@@ -23,6 +22,21 @@ class DetailViewController: BaseViewController {
         return view
     }()
     
+    lazy var dismissBTN: UIButton = {
+        let btn = UIButton()
+        let image = UIImage(systemName: "xmark")
+        btn.setImage(image, for: .normal)
+        btn.imageView?.tintColor = .systemBlue
+        btn.layer.borderColor = UIColor.systemBlue.cgColor
+        btn.layer.borderWidth = 2
+        btn.layer.cornerRadius = 15
+        btn.layer.backgroundColor = Colors.bg.cgColor
+        btn.translatesAutoresizingMaskIntoConstraints = false
+        btn.layer.zPosition = 9999
+        btn.addTarget(self, action: #selector(dismissBTNpressed), for: .touchUpInside)
+        return btn
+    }()
+    
     lazy var galeryCollectionView: UIHostingController<DetailGaleryView> = {
         let vc = UIHostingController(rootView: DetailGaleryView(viewModel: viewModel as! DetailViewModel))
         vc.view?.translatesAutoresizingMaskIntoConstraints = false
@@ -30,7 +44,7 @@ class DetailViewController: BaseViewController {
     }()
     
     lazy var crewView: DetailCrewViewController = {
-       let crewView = DetailCrewViewController(viewModel: CrewViewModel())
+        let crewView = DetailCrewViewController(viewModel: CrewViewModel())
         crewView.view.translatesAutoresizingMaskIntoConstraints = false
         return crewView
     }()
@@ -50,11 +64,12 @@ class DetailViewController: BaseViewController {
         // Do any additional setup after loading the view.
         view.backgroundColor = Colors.bg
         navigationController?.navigationBar.prefersLargeTitles = false
+        
         if hasCrew {
             crewView.createDataSource()
         }
     }
-
+    
     init(flight: Flight, hasCrew: Bool, viewModel: BaseViewModel) {
         self.hasCrew = hasCrew
         
@@ -76,6 +91,7 @@ class DetailViewController: BaseViewController {
         stackView.addSubview(galeryCollectionView.view)
         stackView.addSubview(detailInfoView)
         stackView.addSubview(crewView.view)
+        stackView.addSubview(dismissBTN)
     }
     
     override func addConstrainghts() {
@@ -83,6 +99,12 @@ class DetailViewController: BaseViewController {
         stackView.sameConstrainghts(as: scrollView)
         
         NSLayoutConstraint.activate([
+            
+            dismissBTN.topAnchor.constraint(equalTo: view.topAnchor, constant: 25),
+            dismissBTN.leftAnchor.constraint(equalTo: stackView.leftAnchor, constant: 10),
+            dismissBTN.widthAnchor.constraint(equalToConstant: 30),
+            dismissBTN.heightAnchor.constraint(equalToConstant: 30),
+            
             galeryCollectionView.view.topAnchor.constraint(equalTo: stackView.topAnchor),
             galeryCollectionView.view.leftAnchor.constraint(equalTo: stackView.leftAnchor),
             galeryCollectionView.view.rightAnchor.constraint(equalTo: stackView.rightAnchor),
@@ -109,6 +131,10 @@ class DetailViewController: BaseViewController {
         
     }
     
+    @objc func dismissBTNpressed() {
+        dismiss(animated: true)
+    }
+    
     override func setUpBindings() {
         guard let viewModel = viewModel as? DetailViewModel else { return }
         
@@ -131,7 +157,7 @@ class DetailViewController: BaseViewController {
     
     func createLayout() -> UICollectionViewLayout {
         guard let viewModel = viewModel as? DetailViewModel else { fatalError() }
-
+        
         let layoutSize = NSCollectionLayoutSize(widthDimension: .fractionalWidth(1),
                                                 heightDimension: .fractionalHeight(1))
         let item = NSCollectionLayoutItem(layoutSize: layoutSize)

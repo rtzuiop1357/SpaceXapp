@@ -22,8 +22,9 @@ class DetailCrewCell: BaseCell {
     lazy var nameLabel: UILabel = {
         let view = UILabel()
         view.translatesAutoresizingMaskIntoConstraints = false
-        view.font = .preferredFont(forTextStyle: .body)
+        view.font = .preferredFont(forTextStyle: .headline)
         view.lineBreakMode = .byWordWrapping
+        view.textAlignment = .center
         view.numberOfLines = 0
         return view
     }()
@@ -32,6 +33,7 @@ class DetailCrewCell: BaseCell {
         let view = UILabel()
         view.translatesAutoresizingMaskIntoConstraints = false
         view.font = .preferredFont(forTextStyle: .callout)
+        view.textAlignment = .center
         return view
     }()
     
@@ -59,10 +61,9 @@ class DetailCrewCell: BaseCell {
     override func addConstraints() {
         NSLayoutConstraint.activate([
             imageView.topAnchor.constraint(equalTo: topAnchor, constant: 10),
-            imageView.leftAnchor.constraint(equalTo: leftAnchor, constant: 10),
-            imageView.rightAnchor.constraint(equalTo: rightAnchor, constant: -10),
             imageView.heightAnchor.constraint(equalTo: heightAnchor, constant: -70),
             imageView.widthAnchor.constraint(equalTo: heightAnchor, constant: -70),
+            imageView.centerXAnchor.constraint(equalTo: centerXAnchor),
             
             nameLabel.topAnchor.constraint(equalTo: imageView.bottomAnchor, constant: 5),
             nameLabel.leftAnchor.constraint(equalTo: leftAnchor, constant: 10),

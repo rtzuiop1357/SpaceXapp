@@ -6,7 +6,10 @@
 //
 
 import Foundation
+import Combine
 
 class BaseViewModel {
     func configure<T>(data: T) {}
+    
+    var cancellables: Set<AnyCancellable> = []
 }

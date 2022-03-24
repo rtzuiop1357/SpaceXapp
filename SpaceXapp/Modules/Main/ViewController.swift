@@ -4,7 +4,6 @@
 //
 //  Created by vojta on 15.02.2022.
 //
-
 import UIKit
 import Combine
 
@@ -17,7 +16,7 @@ class ViewController: UIViewController {
     //MARK: - ViewModel
     let viewModel: MainViewModel
     var subscriptons: Set<AnyCancellable> = []
-
+    
     //MARK: -  UI elements
     lazy var mainTableView: UITableView = {
         let collectionView = UITableView(frame: .zero)
@@ -51,13 +50,11 @@ class ViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         // Do any additional setup after loading the view.
-        setupMainCollectionView()
+        setupMainTableVeiw()
         
         //navigationBar setup
-        navigationController?.navigationBar.prefersLargeTitles = true
-        navigationItem.title = "SpaceX"
+        setupNavBar()
         
-        addRefreshGesture()
         navigationItem.searchController = searchController
         
         let dateFilterItem = UIBarButtonItem(image: UIImage(systemName: "chevron.down.circle"),
@@ -81,8 +78,7 @@ class ViewController: UIViewController {
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
-        navigationController?.navigationBar.prefersLargeTitles = true
-        addRefreshGesture()
+        setupNavBar()
     }
     
     //MARK: - Navbar button methods
@@ -137,42 +133,52 @@ extension ViewController {
 
 //MARK: - Configuring MaincollectionViews
 extension ViewController: UITableViewDelegate {
-
+    
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         let flight = viewModel.searchCollectionOfFlights[indexPath.row]
         tableView.deselectRow(at: indexPath, animated: true)
         
         let hasCrew = !flight.crew.isEmpty
-        let vc = DetailViewController(flight: flight, hasCrew: hasCrew, viewModel: DetailViewModel())
         
-        navigationController?.pushViewController(vc, animated: true)
+        let vm = DetailViewModel()
+        let vc = DetailViewController(flight: flight, hasCrew: hasCrew, viewModel: vm)
+        vc.modalPresentationStyle = .fullScreen
+        
+        present(vc, animated: true)
+    }
+}
+
+extension ViewController {
+    func setupNavBar() {
+        navigationController?.navigationBar.prefersLargeTitles = true
+        addRefreshGesture()
+        navigationItem.title = "SpaceX"
     }
 }
 
 extension ViewController {
     
-    func setupMainCollectionView() {
+    func setupMainTableVeiw() {
         view.addSubview(mainTableView)
         mainTableView.delegate = self
-        mainTableView.register(MainCollectionViewCell.self, forCellReuseIdentifier: "cell")
+        mainTableView.register(MainTableViewCell.self, forCellReuseIdentifier: "cell")
+        mainTableView.rowHeight = view.bounds.width
+        
+        mainTableView.prefetchDataSource = self
+        
         
         configureDatasource()
         viewModel.setInitialData()
-        NSLayoutConstraint.activate([
-            mainTableView.topAnchor.constraint(equalTo: view.topAnchor),
-            mainTableView.bottomAnchor.constraint(equalTo: view.bottomAnchor),
-            mainTableView.leftAnchor.constraint(equalTo: view.leftAnchor),
-            mainTableView.rightAnchor.constraint(equalTo: view.rightAnchor),
-        ])
+        mainTableView.sameConstrainghts(as: view)
+        
     }
     
     private func configureDatasource() {
-        
         viewModel.dataSource = .init(tableView: mainTableView,
                                      cellProvider: { tableView, indexPath, itemIdentifier in
             let cell = tableView.dequeueReusableCell(
                 withIdentifier: "cell",
-                for: indexPath) as! MainCollectionViewCell
+                for: indexPath) as! MainTableViewCell
             
             guard self.viewModel.searchCollectionOfFlights.count > indexPath.row else { return cell }
             
@@ -205,14 +211,35 @@ extension ViewController {
         })
     }
 }
- //MARK: - Searchbar related methods
+
+extension ViewController: UITableViewDataSourcePrefetching {
+    func tableView(_ tableView: UITableView, prefetchRowsAt indexPaths: [IndexPath]) {
+        
+        for indexPath in indexPaths {
+            let flight = self.viewModel.searchCollectionOfFlights[indexPath.row]
+            //checking if the flight object has images in it
+            //if not than adding default image with SpaceX logo
+            if let link = flight.links.images.original.first {
+                //checking if we had already downloaded this image
+                if nil == ImageStorage.shared.getImage(for: link) {
+                    //sets placeholder as current image of the cell
+                    self.viewModel.downloadImage(from: link) { [weak self] _ in
+                        self?.viewModel.setItemNeedsUpdate(id: flight.id)
+                    }
+                }
+            }
+        }
+    }
+}
+
+//MARK: - Searchbar related methods
 extension ViewController: UISearchControllerDelegate,
                           UISearchResultsUpdating,
                           UISearchBarDelegate {
     
     func updateSearchResults(for searchController: UISearchController) {
         mainTableView.refreshControl = nil
-
+        
         guard let text = searchController.searchBar.text else {
             return
         }
@@ -221,15 +248,8 @@ extension ViewController: UISearchControllerDelegate,
             viewModel.updateData(sort: true)
             return
         }
-        // there is a problem with updateing the main collection view
-        // the code was running too fast so the collection view didnot have enought
-        // time to update itself so i added this delay that gives it enought time to
-        // render so it doesn't crash...
-//        DispatchQueue.main.asyncAfter(deadline: .now() + 1) {
-//            guard text == searchController.searchBar.text else { return }
-//
-            self.viewModel.search(text: text)
-//        }
+        
+        self.viewModel.search(text: text)
     }
     
     func searchBarCancelButtonClicked(_ searchBar: UISearchBar) {

@@ -18,6 +18,8 @@ class DetailViewModel: BaseViewModel, ObservableObject {
     @Published var dateString: String = ""
     @Published var images: [ImageObject] = []
     
+    var id: String = ""
+    
     override func configure<T>(data: T) {
         guard let data = data as? Flight else { fatalError() }
                 
@@ -29,6 +31,8 @@ class DetailViewModel: BaseViewModel, ObservableObject {
         }
         detail = data.details ?? "no details...."
         dateString = data.formatedDate
+        
+        id = data.id
         
         downloadImages(links: data.links.images.original)
     }

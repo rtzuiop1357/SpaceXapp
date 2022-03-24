@@ -34,7 +34,8 @@ class DetailCrewViewController: BaseViewController {
         let layout = UICollectionViewFlowLayout()
         layout.scrollDirection = .horizontal
         layout.itemSize = CGSize(width: 200, height: 200)
-        layout.sectionInset = UIEdgeInsets(top: 0, left: 20, bottom: 50, right: 0)
+        //layout.estimatedItemSize = CGSize(width: 200, height: 200)
+        layout.sectionInset = UIEdgeInsets(top: 0, left: 20, bottom: 20, right: 0)
         return layout
     }
 

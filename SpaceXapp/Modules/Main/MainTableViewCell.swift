@@ -7,7 +7,7 @@
 
 import UIKit
 
-class MainCollectionViewCell: UITableViewCell {
+class MainTableViewCell: UITableViewCell {
     
     static let cellIdentifier = "cell"
 
