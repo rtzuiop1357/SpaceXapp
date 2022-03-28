@@ -16,6 +16,7 @@ class ViewController: UIViewController {
     //MARK: - ViewModel
     let viewModel: MainViewModel
     var subscriptons: Set<AnyCancellable> = []
+    let presenter: MainPresenter
     
     //MARK: -  UI elements
     lazy var mainTableView: UITableView = {
@@ -23,7 +24,7 @@ class ViewController: UIViewController {
         collectionView.translatesAutoresizingMaskIntoConstraints = false
         return collectionView
     }()
-    
+
     private lazy var searchController: UISearchController = {
         let sc = UISearchController(searchResultsController: nil)
         sc.searchResultsUpdater = self
@@ -35,11 +36,16 @@ class ViewController: UIViewController {
         return sc
     }()
     
-    init(viewModel: BaseViewModel) {
+    init(viewModel: BaseViewModel, presenter: BasePresenter) {
         guard let viewModel = viewModel as? MainViewModel else { fatalError() }
+        guard let presenter = presenter as? MainPresenter else { fatalError() }
+        
         self.viewModel = viewModel
+        self.presenter = presenter
         
         super.init(nibName: nil, bundle: nil)
+        
+        self.presenter.parent = self
     }
     
     required init?(coder: NSCoder) {
@@ -135,16 +141,18 @@ extension ViewController {
 extension ViewController: UITableViewDelegate {
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        tableView.deselectRow(at: indexPath, animated: false)
+        
         let flight = viewModel.searchCollectionOfFlights[indexPath.row]
-        tableView.deselectRow(at: indexPath, animated: true)
+        guard let cell = tableView.cellForRow(at: indexPath) as? MainTableViewCell else { return }
         
-        let hasCrew = !flight.crew.isEmpty
+        let imageFrame = cell.convert(cell.mainImageView.frame, to: view)
+        let fromFrame = tableView.convert(cell.frame, to: tableView.superview)
         
-        let vm = DetailViewModel()
-        let vc = DetailViewController(flight: flight, hasCrew: hasCrew, viewModel: vm)
-        vc.modalPresentationStyle = .fullScreen
+        presenter.fromFrame = fromFrame
+        presenter.imageFrame = imageFrame
         
-        present(vc, animated: true)
+        presenter.present(data: flight)
     }
 }
 
@@ -214,15 +222,11 @@ extension ViewController {
 
 extension ViewController: UITableViewDataSourcePrefetching {
     func tableView(_ tableView: UITableView, prefetchRowsAt indexPaths: [IndexPath]) {
-        
         for indexPath in indexPaths {
             let flight = self.viewModel.searchCollectionOfFlights[indexPath.row]
-            //checking if the flight object has images in it
-            //if not than adding default image with SpaceX logo
+            
             if let link = flight.links.images.original.first {
-                //checking if we had already downloaded this image
                 if nil == ImageStorage.shared.getImage(for: link) {
-                    //sets placeholder as current image of the cell
                     self.viewModel.downloadImage(from: link) { [weak self] _ in
                         self?.viewModel.setItemNeedsUpdate(id: flight.id)
                     }
@@ -233,9 +237,7 @@ extension ViewController: UITableViewDataSourcePrefetching {
 }
 
 //MARK: - Searchbar related methods
-extension ViewController: UISearchControllerDelegate,
-                          UISearchResultsUpdating,
-                          UISearchBarDelegate {
+extension ViewController: UISearchControllerDelegate, UISearchResultsUpdating, UISearchBarDelegate {
     
     func updateSearchResults(for searchController: UISearchController) {
         mainTableView.refreshControl = nil

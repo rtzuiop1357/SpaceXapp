@@ -10,7 +10,6 @@ import UIKit
 class MainTableViewCell: UITableViewCell {
     
     static let cellIdentifier = "cell"
-
     
     lazy var mainImageView: UIImageView = {
         let imageView = UIImageView()

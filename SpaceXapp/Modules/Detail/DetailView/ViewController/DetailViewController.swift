@@ -26,11 +26,7 @@ class DetailViewController: BaseViewController {
         let btn = UIButton()
         let image = UIImage(systemName: "xmark")
         btn.setImage(image, for: .normal)
-        btn.imageView?.tintColor = .systemBlue
-        btn.layer.borderColor = UIColor.systemBlue.cgColor
-        btn.layer.borderWidth = 2
-        btn.layer.cornerRadius = 15
-        btn.layer.backgroundColor = Colors.bg.cgColor
+        btn.imageView?.tintColor = .white
         btn.translatesAutoresizingMaskIntoConstraints = false
         btn.layer.zPosition = 9999
         btn.addTarget(self, action: #selector(dismissBTNpressed), for: .touchUpInside)
@@ -64,6 +60,11 @@ class DetailViewController: BaseViewController {
         // Do any additional setup after loading the view.
         view.backgroundColor = Colors.bg
         navigationController?.navigationBar.prefersLargeTitles = false
+        
+        scrollView.delegate = self
+        
+        let dismissPan = UIPanGestureRecognizer(target: self, action: #selector(dismissPanAction))
+        view.addGestureRecognizer(dismissPan)
         
         if hasCrew {
             crewView.createDataSource()
@@ -135,6 +136,10 @@ class DetailViewController: BaseViewController {
         dismiss(animated: true)
     }
     
+    @objc func dismissPanAction(_ sender: UIPanGestureRecognizer? = nil) {
+        if (sender?.translation(in: self.view).y)! > 100 { dismiss(animated: true) }
+    }
+    
     override func setUpBindings() {
         guard let viewModel = viewModel as? DetailViewModel else { return }
         
@@ -173,5 +178,11 @@ class DetailViewController: BaseViewController {
         let section = NSCollectionLayoutSection(group: group)
         let layout = UICollectionViewCompositionalLayout(section: section)
         return layout
+    }
+}
+
+extension DetailViewController: UIScrollViewDelegate {
+    func scrollViewDidScroll(_ scrollView: UIScrollView) {
+        if scrollView.contentOffset.y < -100 { self.dismiss(animated: true) }
     }
 }

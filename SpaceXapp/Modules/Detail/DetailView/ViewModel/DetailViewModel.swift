@@ -57,7 +57,6 @@ class DetailViewModel: BaseViewModel, ObservableObject {
                             .scalePreservingAspectRatio(targetSize: UIScreen.main.bounds.size) {
                             ImageStorage.shared.store(image, for: link)
                             self.images.append(ImageObject(image: image))
-                            print("image!!")
                         }
                     case .failure(let err):
                         print(err)

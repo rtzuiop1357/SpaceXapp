@@ -35,6 +35,9 @@
 		79C561C027DFC55A00269C72 /* FlightModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 79C561BF27DFC55A00269C72 /* FlightModel.swift */; };
 		79C561C227DFC5B700269C72 /* NetworkingError.swift in Sources */ = {isa = PBXBuildFile; fileRef = 79C561C127DFC5B700269C72 /* NetworkingError.swift */; };
 		79C561C427DFC64300269C72 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 79C561C327DFC64300269C72 /* Assets.xcassets */; };
+		79E384F727EE535E007FB571 /* ScaleAnimator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 79E384F627EE535E007FB571 /* ScaleAnimator.swift */; };
+		79E384FB27EE5375007FB571 /* MainPresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 79E384FA27EE5375007FB571 /* MainPresenter.swift */; };
+		79E384FD27EE53A4007FB571 /* BasePresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 79E384FC27EE53A4007FB571 /* BasePresenter.swift */; };
 		79F6380227E23894003C2A94 /* DetailGaleryView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 79F6380127E23894003C2A94 /* DetailGaleryView.swift */; };
 		79F6380527E2547A003C2A94 /* ImageStorage.swift in Sources */ = {isa = PBXBuildFile; fileRef = 79F6380427E2547A003C2A94 /* ImageStorage.swift */; };
 		79F6380727E25B22003C2A94 /* ImageObject.swift in Sources */ = {isa = PBXBuildFile; fileRef = 79F6380627E25B22003C2A94 /* ImageObject.swift */; };
@@ -69,6 +72,9 @@
 		79C561BF27DFC55A00269C72 /* FlightModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FlightModel.swift; sourceTree = "<group>"; };
 		79C561C127DFC5B700269C72 /* NetworkingError.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetworkingError.swift; sourceTree = "<group>"; };
 		79C561C327DFC64300269C72 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
+		79E384F627EE535E007FB571 /* ScaleAnimator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ScaleAnimator.swift; sourceTree = "<group>"; };
+		79E384FA27EE5375007FB571 /* MainPresenter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainPresenter.swift; sourceTree = "<group>"; };
+		79E384FC27EE53A4007FB571 /* BasePresenter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BasePresenter.swift; sourceTree = "<group>"; };
 		79F6380127E23894003C2A94 /* DetailGaleryView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DetailGaleryView.swift; sourceTree = "<group>"; };
 		79F6380427E2547A003C2A94 /* ImageStorage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImageStorage.swift; sourceTree = "<group>"; };
 		79F6380627E25B22003C2A94 /* ImageObject.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImageObject.swift; sourceTree = "<group>"; };
@@ -198,6 +204,8 @@
 				79C5619327DFC2C400269C72 /* ViewController.swift */,
 				79C5619627DFC2C400269C72 /* MainTableViewCell.swift */,
 				79C5619427DFC2C400269C72 /* MainViewModel.swift */,
+				79E384FA27EE5375007FB571 /* MainPresenter.swift */,
+				79E384F527EE534D007FB571 /* animator  */,
 			);
 			path = Main;
 			sourceTree = "<group>";
@@ -206,6 +214,7 @@
 			isa = PBXGroup;
 			children = (
 				79C5619927DFC2C400269C72 /* BaseViewController.swift */,
+				79E384FC27EE53A4007FB571 /* BasePresenter.swift */,
 				79C5619B27DFC2C400269C72 /* BaseView.swift */,
 				79C5619A27DFC2C400269C72 /* BaseViewModel.swift */,
 				7908029B27E50E2500AC9436 /* BaseCell.swift */,
@@ -234,6 +243,14 @@
 				79C561C127DFC5B700269C72 /* NetworkingError.swift */,
 			);
 			path = Model;
+			sourceTree = "<group>";
+		};
+		79E384F527EE534D007FB571 /* animator  */ = {
+			isa = PBXGroup;
+			children = (
+				79E384F627EE535E007FB571 /* ScaleAnimator.swift */,
+			);
+			path = "animator ";
 			sourceTree = "<group>";
 		};
 		79F6380327E25463003C2A94 /* Storage */ = {
@@ -323,6 +340,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				79C561B027DFC2C400269C72 /* BaseViewController.swift in Sources */,
+				79E384FD27EE53A4007FB571 /* BasePresenter.swift in Sources */,
 				79F6380527E2547A003C2A94 /* ImageStorage.swift in Sources */,
 				79C5617527DFC29E00269C72 /* AppDelegate.swift in Sources */,
 				79F6380727E25B22003C2A94 /* ImageObject.swift in Sources */,
@@ -331,6 +349,7 @@
 				79C561B627DFC2C400269C72 /* UIImageExtensions.swift in Sources */,
 				79C561AF27DFC2C400269C72 /* DetailInfoView.swift in Sources */,
 				792215E927E27A1800E72ABA /* DetailCrewViewController.swift in Sources */,
+				79E384F727EE535E007FB571 /* ScaleAnimator.swift in Sources */,
 				79C561C227DFC5B700269C72 /* NetworkingError.swift in Sources */,
 				79C561B127DFC2C400269C72 /* BaseViewModel.swift in Sources */,
 				79C561B427DFC2C400269C72 /* UIViewControllerExtension.swift in Sources */,
@@ -347,6 +366,7 @@
 				792215EB27E27AF900E72ABA /* CrewModel.swift in Sources */,
 				79C561B527DFC2C400269C72 /* CustomColors.swift in Sources */,
 				79C561C027DFC55A00269C72 /* FlightModel.swift in Sources */,
+				79E384FB27EE5375007FB571 /* MainPresenter.swift in Sources */,
 				79C561AC27DFC2C400269C72 /* MainViewModel.swift in Sources */,
 				791CB4AE27E7ABCD009F23CE /* CrewViewModel.swift in Sources */,
 			);
