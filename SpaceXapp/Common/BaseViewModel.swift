@@ -8,8 +8,8 @@
 import Foundation
 import Combine
 
-class BaseViewModel {
-    func configure<T>(data: T) {}
+class BaseViewModel<T> {
+    func configure(data: T) {}
     
     var cancellables: Set<AnyCancellable> = []
 }

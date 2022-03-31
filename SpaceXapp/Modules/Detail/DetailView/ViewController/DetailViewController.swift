@@ -8,12 +8,16 @@ import UIKit
 import Combine
 import SwiftUI
 
-class DetailViewController: BaseViewController {
+class DetailViewController: BaseViewController<Flight> {
     
     lazy var scrollView: UIScrollView = {
         let scrollView = UIScrollView()
         scrollView.translatesAutoresizingMaskIntoConstraints = false
         return scrollView
+    }()
+    
+    lazy var panGesture: UIPanGestureRecognizer = {
+        return UIPanGestureRecognizer(target: self, action: #selector(dismissPanAction))
     }()
     
     lazy var detailInfoView: DetailInfoView = {
@@ -33,10 +37,10 @@ class DetailViewController: BaseViewController {
         return btn
     }()
     
-    lazy var galeryCollectionView: UIHostingController<DetailGaleryView> = {
-        let vc = UIHostingController(rootView: DetailGaleryView(viewModel: viewModel as! DetailViewModel))
-        vc.view?.translatesAutoresizingMaskIntoConstraints = false
-        return vc
+    lazy var galeryCollectionView: SwiftUIView<DetailGaleryView<DetailViewModel>> = {
+        let galery = SwiftUIView(DetailGaleryView<DetailViewModel>(viewModel: viewModel as! DetailViewModel))
+        galery.translatesAutoresizingMaskIntoConstraints = false
+        return galery
     }()
     
     lazy var crewView: DetailCrewViewController = {
@@ -54,7 +58,7 @@ class DetailViewController: BaseViewController {
     }()
     
     let hasCrew: Bool
-    
+        
     override func viewDidLoad() {
         super.viewDidLoad()
         // Do any additional setup after loading the view.
@@ -62,16 +66,15 @@ class DetailViewController: BaseViewController {
         navigationController?.navigationBar.prefersLargeTitles = false
         
         scrollView.delegate = self
-        
-        let dismissPan = UIPanGestureRecognizer(target: self, action: #selector(dismissPanAction))
-        view.addGestureRecognizer(dismissPan)
+
+        view.addGestureRecognizer(panGesture)
         
         if hasCrew {
             crewView.createDataSource()
         }
     }
     
-    init(flight: Flight, hasCrew: Bool, viewModel: BaseViewModel) {
+    init(flight: Flight, hasCrew: Bool, viewModel: DetailViewModelProtocol) {
         self.hasCrew = hasCrew
         
         super.init(data: flight, viewModel: viewModel)
@@ -89,7 +92,7 @@ class DetailViewController: BaseViewController {
     override func addViews() {
         view.addSubview(scrollView)
         scrollView.addSubview(stackView)
-        stackView.addSubview(galeryCollectionView.view)
+        stackView.addSubview(galeryCollectionView)
         stackView.addSubview(detailInfoView)
         stackView.addSubview(crewView.view)
         stackView.addSubview(dismissBTN)
@@ -106,12 +109,12 @@ class DetailViewController: BaseViewController {
             dismissBTN.widthAnchor.constraint(equalToConstant: 30),
             dismissBTN.heightAnchor.constraint(equalToConstant: 30),
             
-            galeryCollectionView.view.topAnchor.constraint(equalTo: stackView.topAnchor),
-            galeryCollectionView.view.leftAnchor.constraint(equalTo: stackView.leftAnchor),
-            galeryCollectionView.view.rightAnchor.constraint(equalTo: stackView.rightAnchor),
-            galeryCollectionView.view.heightAnchor.constraint(equalToConstant: 400),
+            galeryCollectionView.topAnchor.constraint(equalTo: stackView.topAnchor),
+            galeryCollectionView.leftAnchor.constraint(equalTo: stackView.leftAnchor),
+            galeryCollectionView.rightAnchor.constraint(equalTo: stackView.rightAnchor),
+            galeryCollectionView.heightAnchor.constraint(equalToConstant: 400),
             
-            detailInfoView.topAnchor.constraint(equalTo: galeryCollectionView.view.bottomAnchor),
+            detailInfoView.topAnchor.constraint(equalTo: galeryCollectionView.bottomAnchor),
             detailInfoView.leftAnchor.constraint(equalTo: stackView.leftAnchor),
             detailInfoView.rightAnchor.constraint(equalTo: stackView.rightAnchor),
             detailInfoView.widthAnchor.constraint(equalTo: stackView.widthAnchor),
@@ -133,11 +136,11 @@ class DetailViewController: BaseViewController {
     }
     
     @objc func dismissBTNpressed() {
-        dismiss(animated: true)
+        dismiss(animated: false)
     }
     
     @objc func dismissPanAction(_ sender: UIPanGestureRecognizer? = nil) {
-        if (sender?.translation(in: self.view).y)! > 100 { dismiss(animated: true) }
+        if (sender?.translation(in: self.view).y)! > 100 { dismiss(animated: false) }
     }
     
     override func setUpBindings() {

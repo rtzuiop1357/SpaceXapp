@@ -7,15 +7,14 @@
 
 import UIKit
 
-class CrewViewModel: BaseViewModel {
+class CrewViewModel: BaseViewModel<[String]> {
     
     @Published var crew: [Crew] = []
     
     var crewDatasource: UICollectionViewDiffableDataSource<Section, Crew.ID>? = nil
     var snapshot = NSDiffableDataSourceSnapshot<Section,Crew.ID>()
     
-    override func configure<T>(data: T) {
-        guard let data = data as? [String] else { fatalError() }
+    override func configure(data: [String]) {
         
         getCrew(ids: data)
     }

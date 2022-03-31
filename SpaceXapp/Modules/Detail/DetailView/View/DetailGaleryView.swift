@@ -7,8 +7,8 @@
 
 import SwiftUI
 
-struct DetailGaleryView: View {
-    @ObservedObject var viewModel: DetailViewModel
+struct DetailGaleryView<Model>: View where Model: DetailViewModel {
+    @ObservedObject var viewModel: Model
     
     var body: some View {
         GeometryReader { geo in

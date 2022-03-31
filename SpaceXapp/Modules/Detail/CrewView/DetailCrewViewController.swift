@@ -7,7 +7,7 @@
 
 import UIKit
 
-class DetailCrewViewController: BaseViewController {
+class DetailCrewViewController: BaseViewController<[String]> {
     
     lazy var crewCollectionView: UICollectionView = {
         let collectionView = UICollectionView(frame: .zero, collectionViewLayout: createLayout())
@@ -16,12 +16,12 @@ class DetailCrewViewController: BaseViewController {
         return collectionView
     }()
     
-    override init(viewModel: BaseViewModel? = nil) {
+    override init(viewModel: BaseViewModel<[String]>? = nil) {
         super.init(viewModel: viewModel)
         createDataSource()
     }
     
-    override init<T>(data: T, viewModel: BaseViewModel? = nil) {
+    override init(data: [String], viewModel: BaseViewModel<[String]>? = nil) {
         super.init(data: data, viewModel: viewModel)
         createDataSource()
     }

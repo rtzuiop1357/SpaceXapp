@@ -12,6 +12,10 @@
 		792215E927E27A1800E72ABA /* DetailCrewViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 792215E827E27A1800E72ABA /* DetailCrewViewController.swift */; };
 		792215EB27E27AF900E72ABA /* CrewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 792215EA27E27AF900E72ABA /* CrewModel.swift */; };
 		792215ED27E27F3E00E72ABA /* DetailCrewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 792215EC27E27F3E00E72ABA /* DetailCrewCell.swift */; };
+		793F30A327F632AE006564C2 /* ScaleInteractor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 793F30A227F632AE006564C2 /* ScaleInteractor.swift */; };
+		79A5DA0227F4C4E7006F02B5 /* SwiftUIViewWrapper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 79A5DA0127F4C4E7006F02B5 /* SwiftUIViewWrapper.swift */; };
+		79A5DA0427F4D4A4006F02B5 /* DetailViewModelProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = 79A5DA0327F4D4A3006F02B5 /* DetailViewModelProtocol.swift */; };
+		79A5DA0627F4E27C006F02B5 /* MainViewModelProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = 79A5DA0527F4E27C006F02B5 /* MainViewModelProtocol.swift */; };
 		79B6E0FE27E125A6004321A2 /* Swinject in Frameworks */ = {isa = PBXBuildFile; productRef = 79B6E0FD27E125A6004321A2 /* Swinject */; };
 		79B6E10427E12A90004321A2 /* ViewExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 79B6E10327E12A90004321A2 /* ViewExtensions.swift */; };
 		79C5617527DFC29E00269C72 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 79C5617427DFC29E00269C72 /* AppDelegate.swift */; };
@@ -49,6 +53,10 @@
 		792215E827E27A1800E72ABA /* DetailCrewViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DetailCrewViewController.swift; sourceTree = "<group>"; };
 		792215EA27E27AF900E72ABA /* CrewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CrewModel.swift; sourceTree = "<group>"; };
 		792215EC27E27F3E00E72ABA /* DetailCrewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DetailCrewCell.swift; sourceTree = "<group>"; };
+		793F30A227F632AE006564C2 /* ScaleInteractor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ScaleInteractor.swift; sourceTree = "<group>"; };
+		79A5DA0127F4C4E7006F02B5 /* SwiftUIViewWrapper.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SwiftUIViewWrapper.swift; sourceTree = "<group>"; };
+		79A5DA0327F4D4A3006F02B5 /* DetailViewModelProtocol.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DetailViewModelProtocol.swift; sourceTree = "<group>"; };
+		79A5DA0527F4E27C006F02B5 /* MainViewModelProtocol.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainViewModelProtocol.swift; sourceTree = "<group>"; };
 		79B6E10327E12A90004321A2 /* ViewExtensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewExtensions.swift; sourceTree = "<group>"; };
 		79C5617127DFC29E00269C72 /* SpaceXapp.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = SpaceXapp.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		79C5617427DFC29E00269C72 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
@@ -134,6 +142,7 @@
 			isa = PBXGroup;
 			children = (
 				79C5619127DFC2C400269C72 /* DetailViewModel.swift */,
+				79A5DA0327F4D4A3006F02B5 /* DetailViewModelProtocol.swift */,
 			);
 			path = ViewModel;
 			sourceTree = "<group>";
@@ -202,6 +211,7 @@
 			isa = PBXGroup;
 			children = (
 				79C5619327DFC2C400269C72 /* ViewController.swift */,
+				79A5DA0527F4E27C006F02B5 /* MainViewModelProtocol.swift */,
 				79C5619627DFC2C400269C72 /* MainTableViewCell.swift */,
 				79C5619427DFC2C400269C72 /* MainViewModel.swift */,
 				79E384FA27EE5375007FB571 /* MainPresenter.swift */,
@@ -215,6 +225,7 @@
 			children = (
 				79C5619927DFC2C400269C72 /* BaseViewController.swift */,
 				79E384FC27EE53A4007FB571 /* BasePresenter.swift */,
+				79A5DA0127F4C4E7006F02B5 /* SwiftUIViewWrapper.swift */,
 				79C5619B27DFC2C400269C72 /* BaseView.swift */,
 				79C5619A27DFC2C400269C72 /* BaseViewModel.swift */,
 				7908029B27E50E2500AC9436 /* BaseCell.swift */,
@@ -249,6 +260,7 @@
 			isa = PBXGroup;
 			children = (
 				79E384F627EE535E007FB571 /* ScaleAnimator.swift */,
+				793F30A227F632AE006564C2 /* ScaleInteractor.swift */,
 			);
 			path = "animator ";
 			sourceTree = "<group>";
@@ -344,10 +356,13 @@
 				79F6380527E2547A003C2A94 /* ImageStorage.swift in Sources */,
 				79C5617527DFC29E00269C72 /* AppDelegate.swift in Sources */,
 				79F6380727E25B22003C2A94 /* ImageObject.swift in Sources */,
+				793F30A327F632AE006564C2 /* ScaleInteractor.swift in Sources */,
 				79F6380227E23894003C2A94 /* DetailGaleryView.swift in Sources */,
+				79A5DA0627F4E27C006F02B5 /* MainViewModelProtocol.swift in Sources */,
 				792215ED27E27F3E00E72ABA /* DetailCrewCell.swift in Sources */,
 				79C561B627DFC2C400269C72 /* UIImageExtensions.swift in Sources */,
 				79C561AF27DFC2C400269C72 /* DetailInfoView.swift in Sources */,
+				79A5DA0427F4D4A4006F02B5 /* DetailViewModelProtocol.swift in Sources */,
 				792215E927E27A1800E72ABA /* DetailCrewViewController.swift in Sources */,
 				79E384F727EE535E007FB571 /* ScaleAnimator.swift in Sources */,
 				79C561C227DFC5B700269C72 /* NetworkingError.swift in Sources */,
@@ -357,6 +372,7 @@
 				79C561A827DFC2C400269C72 /* Networking.swift in Sources */,
 				79C561AA27DFC2C400269C72 /* DetailViewModel.swift in Sources */,
 				79C561A927DFC2C400269C72 /* DetailViewController.swift in Sources */,
+				79A5DA0227F4C4E7006F02B5 /* SwiftUIViewWrapper.swift in Sources */,
 				79B6E10427E12A90004321A2 /* ViewExtensions.swift in Sources */,
 				79C5617727DFC29E00269C72 /* SceneDelegate.swift in Sources */,
 				7908029C27E50E2500AC9436 /* BaseCell.swift in Sources */,

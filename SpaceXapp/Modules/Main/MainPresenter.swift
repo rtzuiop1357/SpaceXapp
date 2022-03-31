@@ -7,17 +7,19 @@
 
 import UIKit
 
-
 class MainPresenter: BasePresenter {
     
     var fromFrame: CGRect!
     var imageFrame: CGRect!
     
+    
+    var interactor: ScaleInteractor?
     var animator: ScaleAnimator?
-        
+    
     override init() {
         super.init()
         animator = ScaleAnimator(duration: 0.6)
+        interactor = ScaleInteractor()
     }
     
     override func present<T>(data: T) {
@@ -34,6 +36,8 @@ class MainPresenter: BasePresenter {
         animator?.fromFrame = fromFrame
         animator?.imageFrame = imageFrame
         
+        interactor?.attachToVC(vc: vc, view: vc.view)
+        
         parent?.present(vc, animated: true)
     }
 }
@@ -44,6 +48,15 @@ extension MainPresenter: UIViewControllerTransitioningDelegate {
                              presenting: UIViewController,
                              source: UIViewController) -> UIViewControllerAnimatedTransitioning? {
         animator?.animationType = .present
+        return animator
+    }
+    
+    func interactionControllerForDismissal(using animator: UIViewControllerAnimatedTransitioning) -> UIViewControllerInteractiveTransitioning? {
+        return interactor
+    }
+    
+    func animationController(forDismissed dismissed: UIViewController) -> UIViewControllerAnimatedTransitioning? {
+        animator?.animationType = .dismiss
         return animator
     }
 }

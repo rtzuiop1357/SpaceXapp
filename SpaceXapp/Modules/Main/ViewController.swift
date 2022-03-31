@@ -14,7 +14,7 @@ enum Section {
 class ViewController: UIViewController {
     
     //MARK: - ViewModel
-    let viewModel: MainViewModel
+    let viewModel: MainViewModelProtocol
     var subscriptons: Set<AnyCancellable> = []
     let presenter: MainPresenter
     
@@ -36,8 +36,7 @@ class ViewController: UIViewController {
         return sc
     }()
     
-    init(viewModel: BaseViewModel, presenter: BasePresenter) {
-        guard let viewModel = viewModel as? MainViewModel else { fatalError() }
+    init(viewModel: MainViewModelProtocol, presenter: BasePresenter) {
         guard let presenter = presenter as? MainPresenter else { fatalError() }
         
         self.viewModel = viewModel
@@ -69,7 +68,7 @@ class ViewController: UIViewController {
                                              action: #selector(sortBy))
         navigationItem.leftBarButtonItem = dateFilterItem
         
-        viewModel.$filterByImage
+        viewModel.filterByImagePublisher
             .sink { filter in
                 let val = filter ? ".fill" : ""
                 let photoFilterItem = UIBarButtonItem(image: UIImage(systemName: "line.3.horizontal.decrease.circle\(val)"),

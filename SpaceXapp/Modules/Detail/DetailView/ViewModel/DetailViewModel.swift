@@ -9,7 +9,7 @@ import Foundation
 import Combine
 import UIKit
 
-class DetailViewModel: BaseViewModel, ObservableObject {
+class DetailViewModel: BaseViewModel<Flight>, DetailViewModelProtocol, ObservableObject {
     
     //Propeties
     @Published var name: String = ""
@@ -20,8 +20,7 @@ class DetailViewModel: BaseViewModel, ObservableObject {
     
     var id: String = ""
     
-    override func configure<T>(data: T) {
-        guard let data = data as? Flight else { fatalError() }
+    override func configure(data: Flight) {
                 
         name = data.name
         if let success = data.success {

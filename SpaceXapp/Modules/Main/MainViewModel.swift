@@ -8,14 +8,16 @@
 import UIKit
 import Combine
 
-class MainViewModel: BaseViewModel {
+class MainViewModel: BaseViewModel<Any>, MainViewModelProtocol {
+    var filterByImagePublisher: Published<Bool>.Publisher { $filterByImage }
+    
     
     var sorted = ComparisonResult.orderedDescending
     
     fileprivate var idsOfFlights: [Flight] = []
     
     @Published var filterByImage: Bool = false
-    
+        
     var searchCollectionOfFlights: [Flight] = []
     
     //custom image storage used for storing images that are shared between multiple views...

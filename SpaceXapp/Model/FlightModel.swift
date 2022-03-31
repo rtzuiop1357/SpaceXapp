@@ -67,7 +67,6 @@ struct Failiure: Codable {
     let reason: String
 }
 
-
 struct FlickerImages: Codable {
     let original: [String]
 }

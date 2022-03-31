@@ -8,11 +8,11 @@
 import UIKit
 
 
-class BaseView: UIView {
+class BaseView<T>: UIView {
 
-    weak var viewModel: BaseViewModel? = nil
+    weak var viewModel: BaseViewModel<T>? = nil
     
-    init(viewModel: BaseViewModel? = nil) {
+    init(viewModel: BaseViewModel<T>? = nil) {
         super.init(frame: .zero)
         addViews()
         addConstraints()

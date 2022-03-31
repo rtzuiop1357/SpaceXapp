@@ -7,7 +7,6 @@
 
 import UIKit
 
-
 class ScaleAnimator: NSObject, UIViewControllerAnimatedTransitioning {
     
     private let duration: TimeInterval
@@ -37,7 +36,7 @@ class ScaleAnimator: NSObject, UIViewControllerAnimatedTransitioning {
             fatalError()
         }
     }
-    //TODO: make it beter...
+    
     private func present(using context: UIViewControllerContextTransitioning) {
         guard let toVC = context.viewController (forKey: .to) as? DetailViewController else { fatalError() }
         
@@ -45,10 +44,10 @@ class ScaleAnimator: NSObject, UIViewControllerAnimatedTransitioning {
         
         let frame = UIScreen.main.bounds
             
-        toVC.galeryCollectionView.view.transform = .init(scaleX: imageFrame.width / frame.width,
+        toVC.galeryCollectionView.transform = .init(scaleX: imageFrame.width / frame.width,
                                                          y: imageFrame.width / frame.width)
-        toVC.galeryCollectionView.view.layer.cornerRadius = 10
-        toVC.galeryCollectionView.view.layer.masksToBounds = true
+        toVC.galeryCollectionView.layer.cornerRadius = 10
+        toVC.galeryCollectionView.layer.masksToBounds = true
         toVC.view.frame = fromFrame
         
         toVC.crewView.view.isHidden = true
@@ -56,8 +55,8 @@ class ScaleAnimator: NSObject, UIViewControllerAnimatedTransitioning {
         
         UIView.animate(withDuration: duration, delay: 0, usingSpringWithDamping: 1, initialSpringVelocity: 1, options: .curveLinear)  {
             toVC.view.frame = UIScreen.main.bounds
-            toVC.galeryCollectionView.view.layer.cornerRadius = 0
-            toVC.galeryCollectionView.view.transform = .identity
+            toVC.galeryCollectionView.layer.cornerRadius = 0
+            toVC.galeryCollectionView.transform = .identity
             
             toVC.detailInfoView.alpha = 1
         } completion: { complete in
@@ -78,23 +77,10 @@ class ScaleAnimator: NSObject, UIViewControllerAnimatedTransitioning {
         context.containerView.addSubview(fromVC.view)
         context.containerView.insertSubview(toVC.view, belowSubview: fromVC.view)
         
-        
-        fromVC.view.frame = UIScreen.main.bounds
-        fromVC.galeryCollectionView.view.layer.cornerRadius = 0
-        
-        
         UIView.animate(withDuration: duration, delay: 0, usingSpringWithDamping: 1, initialSpringVelocity: 1, options: .curveLinear)  {
-            let frame = UIScreen.main.bounds
-                
-            fromVC.galeryCollectionView.view.transform = .init(scaleX: self.imageFrame.width / frame.width,
-                                                               y: self.imageFrame.width / frame.width)
-            fromVC.galeryCollectionView.view.layer.cornerRadius = 10
-            fromVC.galeryCollectionView.view.layer.masksToBounds = true
-            fromVC.view.frame = self.fromFrame
-            
-            fromVC.crewView.view.isHidden = true
+            fromVC.view.transform = .init(translationX: 0, y: UIScreen.main.bounds.height / 1.25)
+            fromVC.view.alpha = 0
         } completion: { complete in
-            fromVC.crewView.view.isHidden = false
             if context.transitionWasCancelled {
                 context.completeTransition(false)
             } else {

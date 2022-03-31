@@ -8,20 +8,20 @@
 import UIKit
 import Combine
 
-class BaseViewController: UIViewController {
+class BaseViewController<T>: UIViewController {
     
-    var viewModel: BaseViewModel?
+    var viewModel: BaseViewModel<T>?
     
     var cancellables: Set<AnyCancellable> = []
         
-    init<T>(data: T, viewModel: BaseViewModel? = nil) {
+    init(data: T, viewModel: BaseViewModel<T>? = nil) {
         super.init(nibName: nil, bundle: nil)
         self.viewModel = viewModel
         self.setUpBindings()
         self.viewModel?.configure(data: data)
     }
     
-    init(viewModel: BaseViewModel? = nil) {
+    init(viewModel: BaseViewModel<T>? = nil) {
         super.init(nibName: nil, bundle: nil)
         self.viewModel = viewModel
         self.setUpBindings()
@@ -29,7 +29,7 @@ class BaseViewController: UIViewController {
     
     /// override if you use init(viewModel: BaseViewModel? = nil) must be caled from the view Controller that presents this controller
     /// or you can use it to reconfigure ViewModel
-    func configure<T>(data: T) {
+    func configure(data: T) {
         self.viewModel?.configure(data: data)
     }
     
@@ -50,7 +50,6 @@ class BaseViewController: UIViewController {
     func addViews() { fatalError() }
     
     func addConstrainghts() { fatalError() }
-    
     
     func setUpBindings() {}
 }
