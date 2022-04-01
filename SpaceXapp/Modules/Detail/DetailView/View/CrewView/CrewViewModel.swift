@@ -7,12 +7,12 @@
 
 import UIKit
 
-class CrewViewModel: BaseViewModel<[String]> {
+final class CrewViewModel: BaseViewModel<[String]> {
     
     @Published var crew: [Crew] = []
     
     var crewDatasource: UICollectionViewDiffableDataSource<Section, Crew.ID>? = nil
-    var snapshot = NSDiffableDataSourceSnapshot<Section,Crew.ID>()
+    private var snapshot = NSDiffableDataSourceSnapshot<Section,Crew.ID>()
     
     override func configure(data: [String]) {
         
@@ -34,7 +34,7 @@ class CrewViewModel: BaseViewModel<[String]> {
         }
     }
     
-    func getImage(for link: String, id: Crew.ID) {
+    private func getImage(for link: String, id: Crew.ID) {
         if ImageStorage.shared.getImage(for: link) != nil {
             updateCrewData()
         }else{

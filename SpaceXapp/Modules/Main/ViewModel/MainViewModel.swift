@@ -8,9 +8,9 @@
 import UIKit
 import Combine
 
-class MainViewModel: BaseViewModel<Any>, MainViewModelProtocol {
-    var filterByImagePublisher: Published<Bool>.Publisher { $filterByImage }
+final class MainViewModel: BaseViewModel<Any>, MainViewModelProtocol {
     
+    var filterByImagePublisher: Published<Bool>.Publisher { $filterByImage }
     
     var sorted = ComparisonResult.orderedDescending
     

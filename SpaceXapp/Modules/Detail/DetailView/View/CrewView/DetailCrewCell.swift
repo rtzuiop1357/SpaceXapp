@@ -7,7 +7,7 @@
 
 import UIKit
 
-class DetailCrewCell: BaseCell {
+final class DetailCrewCell: BaseCell {
 
     static let identifier = "CrewCell"
     

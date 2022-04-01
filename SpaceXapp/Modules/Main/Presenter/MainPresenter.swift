@@ -7,14 +7,13 @@
 
 import UIKit
 
-class MainPresenter: BasePresenter {
+final class MainPresenter: BasePresenter {
     
     var fromFrame: CGRect!
     var imageFrame: CGRect!
     
-    
-    var interactor: ScaleInteractor?
-    var animator: ScaleAnimator?
+    private var interactor: ScaleInteractor?
+    private var animator: ScaleAnimator?
     
     override init() {
         super.init()

@@ -8,7 +8,7 @@ import UIKit
 import Combine
 import SwiftUI
 
-class DetailViewController: BaseViewController<Flight> {
+final class DetailViewController: BaseViewController<Flight> {
     
     lazy var scrollView: UIScrollView = {
         let scrollView = UIScrollView()
@@ -57,7 +57,7 @@ class DetailViewController: BaseViewController<Flight> {
         return view
     }()
     
-    let hasCrew: Bool
+    private let hasCrew: Bool
         
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -135,11 +135,11 @@ class DetailViewController: BaseViewController<Flight> {
         
     }
     
-    @objc func dismissBTNpressed() {
+    @objc private func dismissBTNpressed() {
         dismiss(animated: false)
     }
     
-    @objc func dismissPanAction(_ sender: UIPanGestureRecognizer? = nil) {
+    @objc private func dismissPanAction(_ sender: UIPanGestureRecognizer? = nil) {
         if (sender?.translation(in: self.view).y)! > 100 { dismiss(animated: false) }
     }
     
@@ -163,7 +163,7 @@ class DetailViewController: BaseViewController<Flight> {
         }.store(in: &cancellables)
     }
     
-    func createLayout() -> UICollectionViewLayout {
+    private func createLayout() -> UICollectionViewLayout {
         guard let viewModel = viewModel as? DetailViewModel else { fatalError() }
         
         let layoutSize = NSCollectionLayoutSize(widthDimension: .fractionalWidth(1),

@@ -8,12 +8,12 @@
 import Foundation
 import UIKit
 
-class ScaleInteractor: UIPercentDrivenInteractiveTransition {
+final class ScaleInteractor: UIPercentDrivenInteractiveTransition {
     
     var fromVC: UIViewController!
     
-    var shouldComplete = false
-    var lastProgress: CGFloat?
+    private var shouldComplete = false
+    private var lastProgress: CGFloat?
     
     func attachToVC(vc: UIViewController,view: UIView) {
         fromVC = vc
@@ -22,7 +22,7 @@ class ScaleInteractor: UIPercentDrivenInteractiveTransition {
         view.addGestureRecognizer(gesture)
     }
     
-    @objc
+    @objc private
     func handlePan(pan: UIPanGestureRecognizer) {
         let translation = pan.translation(in: pan.view?.superview)
         

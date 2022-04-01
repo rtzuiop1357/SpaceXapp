@@ -9,7 +9,9 @@ import Foundation
 import Combine
 import UIKit
 
-class DetailViewModel: BaseViewModel<Flight>, DetailViewModelProtocol, ObservableObject {
+final class DetailViewModel: BaseViewModel<Flight>,
+                             DetailViewModelProtocol,
+                             ObservableObject {
     
     //Propeties
     @Published var name: String = ""
@@ -36,7 +38,7 @@ class DetailViewModel: BaseViewModel<Flight>, DetailViewModelProtocol, Observabl
         downloadImages(links: data.links.images.original)
     }
 
-    func downloadImages(links: [String]) {
+    private func downloadImages(links: [String]) {
         guard !links.isEmpty else {
             let defaultImg = UIImage(named: "SpaceXLogo")!
                 .scalePreservingAspectRatio(targetSize: UIScreen.main.bounds.size)

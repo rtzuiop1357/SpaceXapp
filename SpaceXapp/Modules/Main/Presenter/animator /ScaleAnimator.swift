@@ -7,7 +7,7 @@
 
 import UIKit
 
-class ScaleAnimator: NSObject, UIViewControllerAnimatedTransitioning {
+final class ScaleAnimator: NSObject, UIViewControllerAnimatedTransitioning {
     
     private let duration: TimeInterval
     

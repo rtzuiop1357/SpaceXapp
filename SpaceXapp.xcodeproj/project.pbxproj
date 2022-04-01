@@ -101,6 +101,40 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		790CB18527F7732F0042E965 /* ViewController */ = {
+			isa = PBXGroup;
+			children = (
+				79C5619327DFC2C400269C72 /* ViewController.swift */,
+			);
+			path = ViewController;
+			sourceTree = "<group>";
+		};
+		790CB18627F7733A0042E965 /* ViewModel */ = {
+			isa = PBXGroup;
+			children = (
+				79C5619427DFC2C400269C72 /* MainViewModel.swift */,
+				79A5DA0527F4E27C006F02B5 /* MainViewModelProtocol.swift */,
+			);
+			path = ViewModel;
+			sourceTree = "<group>";
+		};
+		790CB18727F773480042E965 /* View */ = {
+			isa = PBXGroup;
+			children = (
+				79C5619627DFC2C400269C72 /* MainTableViewCell.swift */,
+			);
+			path = View;
+			sourceTree = "<group>";
+		};
+		790CB18827F773500042E965 /* Presenter */ = {
+			isa = PBXGroup;
+			children = (
+				79E384FA27EE5375007FB571 /* MainPresenter.swift */,
+				79E384F527EE534D007FB571 /* animator  */,
+			);
+			path = Presenter;
+			sourceTree = "<group>";
+		};
 		791CB4AF27E7ABD4009F23CE /* CrewView */ = {
 			isa = PBXGroup;
 			children = (
@@ -134,6 +168,7 @@
 			children = (
 				79F6380127E23894003C2A94 /* DetailGaleryView.swift */,
 				79C5619727DFC2C400269C72 /* DetailInfoView.swift */,
+				791CB4AF27E7ABD4009F23CE /* CrewView */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -202,7 +237,6 @@
 			isa = PBXGroup;
 			children = (
 				791CB4B027E7ACEE009F23CE /* DetailView */,
-				791CB4AF27E7ABD4009F23CE /* CrewView */,
 			);
 			path = Detail;
 			sourceTree = "<group>";
@@ -210,12 +244,10 @@
 		79C5619227DFC2C400269C72 /* Main */ = {
 			isa = PBXGroup;
 			children = (
-				79C5619327DFC2C400269C72 /* ViewController.swift */,
-				79A5DA0527F4E27C006F02B5 /* MainViewModelProtocol.swift */,
-				79C5619627DFC2C400269C72 /* MainTableViewCell.swift */,
-				79C5619427DFC2C400269C72 /* MainViewModel.swift */,
-				79E384FA27EE5375007FB571 /* MainPresenter.swift */,
-				79E384F527EE534D007FB571 /* animator  */,
+				790CB18627F7733A0042E965 /* ViewModel */,
+				790CB18527F7732F0042E965 /* ViewController */,
+				790CB18727F773480042E965 /* View */,
+				790CB18827F773500042E965 /* Presenter */,
 			);
 			path = Main;
 			sourceTree = "<group>";

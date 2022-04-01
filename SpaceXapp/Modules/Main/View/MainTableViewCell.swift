@@ -51,7 +51,7 @@ class MainTableViewCell: UITableViewCell {
         fatalError("init(coder:) has not been implemented")
     }
     
-     func setupConstraints() {
+     private func setupConstraints() {
          NSLayoutConstraint.activate([
             mainImageView.topAnchor.constraint(equalTo: topAnchor, constant: 8),
             mainImageView.centerXAnchor.constraint(equalTo: centerXAnchor),
@@ -66,7 +66,7 @@ class MainTableViewCell: UITableViewCell {
          ])
     }
 
-    func setupViews() {
+    private func setupViews() {
         addSubview(mainImageView)
         addSubview(nameLabel)
         addSubview(dateLabel)

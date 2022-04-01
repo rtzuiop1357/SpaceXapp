@@ -11,7 +11,7 @@ enum Section {
     case main
 }
 
-class ViewController: UIViewController {
+final class ViewController: UIViewController {
     
     //MARK: - ViewModel
     let viewModel: MainViewModelProtocol
@@ -19,7 +19,7 @@ class ViewController: UIViewController {
     let presenter: MainPresenter
     
     //MARK: -  UI elements
-    lazy var mainTableView: UITableView = {
+    private lazy var mainTableView: UITableView = {
         let collectionView = UITableView(frame: .zero)
         collectionView.translatesAutoresizingMaskIntoConstraints = false
         return collectionView
@@ -87,7 +87,8 @@ class ViewController: UIViewController {
     }
     
     //MARK: - Navbar button methods
-    @objc func filterByPhoto() {
+    @objc private
+    func filterByPhoto() {
         let ac = UIAlertController(title: "Filter flights", message: nil, preferredStyle: .actionSheet)
         
         ac.addAction(UIAlertAction(title: "show all", style: .default){[weak self] _ in
@@ -105,7 +106,8 @@ class ViewController: UIViewController {
     }
     
     //sorts the flights by date...
-    @objc func sortBy() {
+    @objc private
+    func sortBy() {
         let by = viewModel.sorted == .orderedDescending ? ComparisonResult.orderedAscending : .orderedDescending
         
         let image = viewModel.sorted == .orderedDescending ? "up" : "down"
@@ -127,7 +129,8 @@ extension ViewController {
                                                 for: .valueChanged)
     }
     
-    @objc private func handleRefresh() {
+    @objc private
+    func handleRefresh() {
         viewModel.handleRefresh {
             DispatchQueue.main.async { [weak self] in
                 self?.mainTableView.refreshControl?.endRefreshing()

@@ -7,7 +7,7 @@
 
 import UIKit
 
-class DetailCrewViewController: BaseViewController<[String]> {
+final class DetailCrewViewController: BaseViewController<[String]> {
     
     lazy var crewCollectionView: UICollectionView = {
         let collectionView = UICollectionView(frame: .zero, collectionViewLayout: createLayout())
@@ -30,7 +30,7 @@ class DetailCrewViewController: BaseViewController<[String]> {
         fatalError("init(coder:) has not been implemented")
     }
     
-    func createLayout() -> UICollectionViewLayout {
+    private func createLayout() -> UICollectionViewLayout {
         let layout = UICollectionViewFlowLayout()
         layout.scrollDirection = .horizontal
         layout.itemSize = CGSize(width: 200, height: 200)
