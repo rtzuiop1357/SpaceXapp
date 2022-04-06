@@ -19,8 +19,8 @@ final class ViewController: UIViewController {
     let presenter: MainPresenter
     
     //MARK: -  UI elements
-    private lazy var mainTableView: UITableView = {
-        let collectionView = UITableView(frame: .zero)
+    private lazy var mainCollectionView: UICollectionView = {
+        let collectionView = UICollectionView(frame: .zero, collectionViewLayout: createLayout())
         collectionView.translatesAutoresizingMaskIntoConstraints = false
         return collectionView
     }()
@@ -55,7 +55,7 @@ final class ViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         // Do any additional setup after loading the view.
-        setupMainTableVeiw()
+        setupMainCollectionView()
         
         //navigationBar setup
         setupNavBar()
@@ -69,9 +69,12 @@ final class ViewController: UIViewController {
         navigationItem.leftBarButtonItem = dateFilterItem
         
         viewModel.filterByImagePublisher
-            .sink { filter in
+            .sink { [weak self] filter in
+                guard let self = self else { return }
+                
                 let val = filter ? ".fill" : ""
-                let photoFilterItem = UIBarButtonItem(image: UIImage(systemName: "line.3.horizontal.decrease.circle\(val)"),
+                let imageName = "line.3.horizontal.decrease.circle\(val)"
+                let photoFilterItem = UIBarButtonItem(image: UIImage(systemName: imageName),
                                                       style: .plain,
                                                       target: self,
                                                       action: #selector(self.filterByPhoto))
@@ -84,6 +87,11 @@ final class ViewController: UIViewController {
     override func viewWillAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
         setupNavBar()
+    }
+    
+    override func viewWillTransition(to size: CGSize, with coordinator: UIViewControllerTransitionCoordinator) {
+        super.viewWillTransition(to: size, with: coordinator)
+        mainCollectionView.setCollectionViewLayout(createLayout(), animated: true)
     }
     
     //MARK: - Navbar button methods
@@ -123,8 +131,8 @@ final class ViewController: UIViewController {
 extension ViewController {
     
     func addRefreshGesture() {
-        mainTableView.refreshControl = UIRefreshControl()
-        mainTableView.refreshControl?.addTarget(self,
+        mainCollectionView.refreshControl = UIRefreshControl()
+        mainCollectionView.refreshControl?.addTarget(self,
                                                 action: #selector(handleRefresh),
                                                 for: .valueChanged)
     }
@@ -133,23 +141,23 @@ extension ViewController {
     func handleRefresh() {
         viewModel.handleRefresh {
             DispatchQueue.main.async { [weak self] in
-                self?.mainTableView.refreshControl?.endRefreshing()
+                self?.mainCollectionView.refreshControl?.endRefreshing()
             }
         }
     }
 }
 
 //MARK: - Configuring MaincollectionViews
-extension ViewController: UITableViewDelegate {
+extension ViewController: UICollectionViewDelegate {
     
-    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        tableView.deselectRow(at: indexPath, animated: false)
+    func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
+        collectionView.deselectItem(at: indexPath, animated: false)
         
         let flight = viewModel.searchCollectionOfFlights[indexPath.row]
-        guard let cell = tableView.cellForRow(at: indexPath) as? MainTableViewCell else { return }
+        guard let cell = collectionView.cellForItem(at: indexPath) as? MainCollectionViewCell else { return }
         
         let imageFrame = cell.convert(cell.mainImageView.frame, to: view)
-        let fromFrame = tableView.convert(cell.frame, to: tableView.superview)
+        let fromFrame = collectionView.convert(cell.frame, to: collectionView.superview)
         
         presenter.fromFrame = fromFrame
         presenter.imageFrame = imageFrame
@@ -168,29 +176,58 @@ extension ViewController {
 
 extension ViewController {
     
-    func setupMainTableVeiw() {
-        view.addSubview(mainTableView)
-        mainTableView.delegate = self
-        mainTableView.register(MainTableViewCell.self, forCellReuseIdentifier: "cell")
-        mainTableView.rowHeight = view.bounds.width
+    func createLayout() -> UICollectionViewLayout {
+        let itemSize = NSCollectionLayoutSize(
+            widthDimension: .fractionalWidth(1.0),
+            heightDimension: .fractionalHeight(1.0)
+        )
         
-        mainTableView.prefetchDataSource = self
+        let item = NSCollectionLayoutItem(layoutSize: itemSize)
         
+        let spacing: CGFloat = 10.0
         
+        item.contentInsets = NSDirectionalEdgeInsets(
+            top: spacing,
+            leading: spacing,
+            bottom: 0,
+            trailing: spacing
+        )
+        
+        let groupSize = NSCollectionLayoutSize(
+            widthDimension: .fractionalWidth(1.0),
+            heightDimension: UIDevice.current.orientation == .portrait ? .fractionalWidth(1.0): .fractionalHeight(1.0)
+        )
+        
+        let count = UIDevice.current.orientation == .portrait ? 1 : 2
+        
+        let group = NSCollectionLayoutGroup.horizontal(
+            layoutSize: groupSize,
+            subitem: item,
+            count: count
+        )
+        
+        let section = NSCollectionLayoutSection(group: group)
+        
+        let layout = UICollectionViewCompositionalLayout(section: section)
+        
+        return layout
+    }
+    
+    func setupMainCollectionView() {
+        view.addSubview(mainCollectionView)
+        mainCollectionView.delegate = self
+        
+        mainCollectionView.prefetchDataSource = self
+                
         configureDatasource()
         viewModel.setInitialData()
-        mainTableView.sameConstrainghts(as: view)
-        
+        mainCollectionView.sameConstrainghts(as: view)
     }
     
     private func configureDatasource() {
-        viewModel.dataSource = .init(tableView: mainTableView,
-                                     cellProvider: { tableView, indexPath, itemIdentifier in
-            let cell = tableView.dequeueReusableCell(
-                withIdentifier: "cell",
-                for: indexPath) as! MainTableViewCell
-            
-            guard self.viewModel.searchCollectionOfFlights.count > indexPath.row else { return cell }
+        let cellRegistration: UICollectionView.CellRegistration<MainCollectionViewCell, Flight.ID> = .init{ cell, indexPath, flightID  in
+    
+            guard self.viewModel.searchCollectionOfFlights.count > indexPath.item else { return }
             
             let flight = self.viewModel.searchCollectionOfFlights[indexPath.row]
             //checking if the flight object has images in it
@@ -217,15 +254,18 @@ extension ViewController {
             cell.nameLabel.text = flight.name
             
             cell.dateLabel.text = flight.formatedDate
-            return cell
-        })
+        }
+        
+        viewModel.dataSource = .init(collectionView: mainCollectionView) { collectionView, indexPath, itemIdentifier in
+            collectionView.dequeueConfiguredReusableCell(using: cellRegistration, for: indexPath, item: itemIdentifier)
+        }
     }
 }
 
-extension ViewController: UITableViewDataSourcePrefetching {
-    func tableView(_ tableView: UITableView, prefetchRowsAt indexPaths: [IndexPath]) {
+extension ViewController: UICollectionViewDataSourcePrefetching {
+    func collectionView(_ collectionView: UICollectionView, prefetchItemsAt indexPaths: [IndexPath]) {
         for indexPath in indexPaths {
-            let flight = self.viewModel.searchCollectionOfFlights[indexPath.row]
+            let flight = self.viewModel.searchCollectionOfFlights[indexPath.item]
             
             if let link = flight.links.images.original.first {
                 if nil == ImageStorage.shared.getImage(for: link) {
@@ -239,21 +279,29 @@ extension ViewController: UITableViewDataSourcePrefetching {
 }
 
 //MARK: - Searchbar related methods
-extension ViewController: UISearchControllerDelegate, UISearchResultsUpdating, UISearchBarDelegate {
+extension ViewController: UISearchControllerDelegate,
+                          UISearchResultsUpdating,
+                          UISearchBarDelegate {
     
     func updateSearchResults(for searchController: UISearchController) {
-        mainTableView.refreshControl = nil
+        mainCollectionView.refreshControl = nil
         
         guard let text = searchController.searchBar.text else {
             return
         }
-        //checking if text contains some letters
-        guard text.replacingOccurrences(of: " ", with: "") != "" else {
-            viewModel.updateData(sort: true)
-            return
+        //added delay for typing to fast - the app was crashing before...
+        DispatchQueue.main.asyncAfter(deadline: .now() + 0.1) { [weak self] in
+            guard let self = self else { return }
+            guard text == searchController.searchBar.text else {
+                return
+            }
+            //checking if text contains some letters
+            guard text.replacingOccurrences(of: " ", with: "") != "" else {
+                self.viewModel.updateData(sort: true)
+                return
+            }
+            self.viewModel.search(text: text)
         }
-        
-        self.viewModel.search(text: text)
     }
     
     func searchBarCancelButtonClicked(_ searchBar: UISearchBar) {

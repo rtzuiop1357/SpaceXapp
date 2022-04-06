@@ -7,7 +7,7 @@
 
 import UIKit
 
-class MainTableViewCell: UITableViewCell {
+class MainCollectionViewCell: UICollectionViewCell {
     
     static let cellIdentifier = "cell"
     
@@ -39,11 +39,9 @@ class MainTableViewCell: UITableViewCell {
         return label
     }()
     
-    override init(style: UITableViewCell.CellStyle, reuseIdentifier: String?) {
-        super.init(style: style, reuseIdentifier: reuseIdentifier)
-        
+    override init(frame: CGRect) {
+        super.init(frame: frame)
         setupViews()
-    
         setupConstraints()
     }
     

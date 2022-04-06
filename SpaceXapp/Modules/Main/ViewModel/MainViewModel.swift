@@ -18,17 +18,19 @@ final class MainViewModel: BaseViewModel<Any>, MainViewModelProtocol {
     
     @Published var filterByImage: Bool = false
         
-    var searchCollectionOfFlights: [Flight] = []
+    @Published var searchCollectionOfFlights: [Flight] = []
     
     //custom image storage used for storing images that are shared between multiple views...
     let imageStorage = ImageStorage.shared
      
-    var dataSource: UITableViewDiffableDataSource<Section,Flight.ID>? = nil
+    var dataSource: UICollectionViewDiffableDataSource<Section,Flight.ID>? = nil
     var snapshot = NSDiffableDataSourceSnapshot<Section,Flight.ID>()
     
     override init() {
         super.init()
 
+        bind()
+        
         filterByImage = UserDefaults.standard.bool(forKey: UserDefaultsKeys.image.rawValue)
     }
     
@@ -37,6 +39,20 @@ final class MainViewModel: BaseViewModel<Any>, MainViewModelProtocol {
             UserDefaults.standard.set(val, forKey: UserDefaultsKeys.image.rawValue)
             self.updateData(sort: true)
         }.store(in: &cancellables)
+        
+        $searchCollectionOfFlights
+            .receive(on: DispatchQueue.main)
+            .sink { [weak self] flights in
+                guard let self = self else { return }
+                self.snapshot.deleteAllItems()
+                self.snapshot.appendSections([Section.main])
+            
+                let arrayofIDs = flights.map { $0.id }
+                self.snapshot.appendItems(arrayofIDs, toSection: .main)
+                
+                self.dataSource?.apply(self.snapshot, animatingDifferences: true)
+            }
+            .store(in: &cancellables)
     }
     
     func search(text: String) {
@@ -50,14 +66,6 @@ final class MainViewModel: BaseViewModel<Any>, MainViewModelProtocol {
         searchCollectionOfFlights = idsOfFlights.filter {
             return filterByImage ? filter2($0) : filter1($0)
         }
-        
-        snapshot.deleteAllItems()
-        snapshot.appendSections([Section.main])
-    
-        let arrayofIDs = searchCollectionOfFlights.map { $0.id }
-        snapshot.appendItems(arrayofIDs, toSection: .main)
-        
-        dataSource?.apply(snapshot, animatingDifferences: true)
     }
     
     func clearSearch() {
@@ -67,9 +75,6 @@ final class MainViewModel: BaseViewModel<Any>, MainViewModelProtocol {
     func updateData(sort: Bool) {
         let flight = idsOfFlights
         
-        idsOfFlights = []
-        searchCollectionOfFlights = []
-        
         //Sorting data
         let flights = !sort ? flight : flight.sorted {
             $0.getDate.compare($1.getDate) == sorted
@@ -78,17 +83,9 @@ final class MainViewModel: BaseViewModel<Any>, MainViewModelProtocol {
         let filteredFlights = !filterByImage ? flights : flights.filter { item in
             !item.links.images.original.isEmpty
         }
-        
+        searchCollectionOfFlights = []
         searchCollectionOfFlights = filteredFlights
         idsOfFlights = flights
-        
-        snapshot.deleteAllItems()
-        snapshot.appendSections([Section.main])
-    
-        let arrayofIDs = searchCollectionOfFlights.map { $0.id }
-        snapshot.appendItems(arrayofIDs, toSection: .main)
-        
-        dataSource?.apply(snapshot, animatingDifferences: true)
     }
     
     func downloadImage(from link: String, completion: @escaping(UIImage) -> Void) {

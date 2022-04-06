@@ -21,7 +21,7 @@ struct Flight: Identifiable, Codable {
     
     static let shortDateFormatter: DateFormatter = {
         let dateFormater = DateFormatter()
-        dateFormater.dateStyle = .short
+        dateFormater.dateStyle = .long
         return dateFormater
     }()
     

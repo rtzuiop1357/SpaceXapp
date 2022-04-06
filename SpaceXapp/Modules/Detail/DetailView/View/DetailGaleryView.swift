@@ -7,8 +7,8 @@
 
 import SwiftUI
 
-struct DetailGaleryView<Model>: View where Model: DetailViewModel {
-    @ObservedObject var viewModel: Model
+struct DetailGaleryView: View {
+    @ObservedObject var viewModel: DetailViewModel
     
     var body: some View {
         GeometryReader { geo in
@@ -19,8 +19,11 @@ struct DetailGaleryView<Model>: View where Model: DetailViewModel {
                         .scaledToFill()
                         .frame(width: geo.size.width, height: geo.size.height)
                         .clipped()
+                        .onTapGesture(count: 2) {
+                            print(image.image)
+                        }
                 }
             }.tabViewStyle(.page)
-        }
+        }.ignoresSafeArea(.all, edges: [.leading,.trailing])
     }
 }

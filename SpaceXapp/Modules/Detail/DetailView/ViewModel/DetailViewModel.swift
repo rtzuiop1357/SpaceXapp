@@ -42,7 +42,7 @@ final class DetailViewModel: BaseViewModel<Flight>,
         guard !links.isEmpty else {
             let defaultImg = UIImage(named: "SpaceXLogo")!
                 .scalePreservingAspectRatio(targetSize: UIScreen.main.bounds.size)
-            images.append(ImageObject(image: defaultImg))
+            images.append(ImageObject(id: UUID().uuidString, image: defaultImg))
             return
         }
         
@@ -57,7 +57,7 @@ final class DetailViewModel: BaseViewModel<Flight>,
                         if let image = UIImage(data: data)?
                             .scalePreservingAspectRatio(targetSize: UIScreen.main.bounds.size) {
                             ImageStorage.shared.store(image, for: link)
-                            self.images.append(ImageObject(image: image))
+                            self.images.append(ImageObject(id: UUID().uuidString, image: image))
                         }
                     case .failure(let err):
                         print(err)

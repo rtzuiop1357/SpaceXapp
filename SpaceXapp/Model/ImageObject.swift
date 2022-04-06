@@ -9,6 +9,6 @@ import Foundation
 import UIKit
 
 struct ImageObject: Identifiable {
-    let id = UUID()
+    let id: String
     var image: UIImage
 }

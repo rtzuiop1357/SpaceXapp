@@ -18,7 +18,7 @@ class ImageStorage {
     private var images: [String: ImageObject] = [:]
     
     public func store(_ image: UIImage, for id: String) {
-        images[id] = ImageObject(image: image)
+        images[id] = ImageObject(id: id, image: image)
     }
     
     public func getImage(for id: String) -> UIImage? {

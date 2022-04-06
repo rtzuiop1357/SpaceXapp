@@ -10,25 +10,51 @@ import UIKit
 
 final class ScaleInteractor: UIPercentDrivenInteractiveTransition {
     
-    var fromVC: UIViewController!
+    weak var fromVC: UIViewController?
+    
+    weak var scrollPan: UIPanGestureRecognizer?
     
     private var shouldComplete = false
     private var lastProgress: CGFloat?
     
-    func attachToVC(vc: UIViewController,view: UIView) {
+    //doesn't need to be 100% acurate it is there just to not dismiss view when scrollview is scrolling
+    private var offset: CGPoint = .zero
+    
+    func attachToVC(vc: UIViewController, view: UIView) {
         fromVC = vc
         
-        let gesture = UIPanGestureRecognizer(target: self, action: #selector(handlePan))
-        view.addGestureRecognizer(gesture)
+        let pangesture = UIPanGestureRecognizer(target: self, action: #selector(handlePan))
+        view.addGestureRecognizer(pangesture)
+        
+        scrollPan?.addTarget(self, action: #selector(handlePan))
+    }
+    
+    override init() {
+        super.init()
+        NotificationCenter.default.addObserver(self,
+                                               selector: #selector(updateOffset),
+                                               name: .scrollViewScrolled,
+                                               object: nil)
+    }
+    
+    @objc private
+    func updateOffset(notification: Notification) {
+        if let object = notification.object as? CGPoint {
+            offset = object
+        }
     }
     
     @objc private
     func handlePan(pan: UIPanGestureRecognizer) {
+        if offset.y > 0 {
+            cancel()
+            return
+        }
+        
         let translation = pan.translation(in: pan.view?.superview)
         
-        //Represents the percentage of the transition that must be completed before allowing to complete.
         let percentThreshold: CGFloat = 0.2
-        //Represents the difference between progress that is required to trigger the completion of the transition.
+
         let automaticOverrideThreshold: CGFloat = 0.03
         
         let screenHeight: CGFloat = UIScreen.main.bounds.size.width
@@ -44,31 +70,27 @@ final class ScaleInteractor: UIPercentDrivenInteractiveTransition {
         case .changed:
             guard let lastProgress = lastProgress else {return}
             
-            // When swiping back
             if lastProgress > progress {
                 shouldComplete = false
-                // When swiping quick to the right
+
             } else if progress > lastProgress + automaticOverrideThreshold {
                 shouldComplete = true
             } else {
-                // Normal behavior
                 shouldComplete = progress > percentThreshold
             }
-            update(progress)
+            self.update(progress)
             
         case .ended, .cancelled:
             if pan.state == .cancelled || shouldComplete == false {
-                cancel()
+                self.cancel()
             } else {
-                finish()
+                self.finish()
             }
-            
+
         default:
             break
         }
         
         lastProgress = progress
-        
     }
-    
 }

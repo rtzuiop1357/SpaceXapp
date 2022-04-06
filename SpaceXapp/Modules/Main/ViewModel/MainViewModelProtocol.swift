@@ -18,7 +18,7 @@ protocol MainViewModelProtocol: BaseViewModel<Any> {
     
     var sorted: ComparisonResult { get set }
     
-    var dataSource: UITableViewDiffableDataSource<Section,Flight.ID>? { get set }
+    var dataSource: UICollectionViewDiffableDataSource<Section,Flight.ID>? { get set }
     
     func search(text: String)
     

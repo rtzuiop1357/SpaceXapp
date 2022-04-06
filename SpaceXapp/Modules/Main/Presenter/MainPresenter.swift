@@ -17,7 +17,7 @@ final class MainPresenter: BasePresenter {
     
     override init() {
         super.init()
-        animator = ScaleAnimator(duration: 0.6)
+        animator = ScaleAnimator(duration: 0.9)
         interactor = ScaleInteractor()
     }
     
@@ -31,10 +31,11 @@ final class MainPresenter: BasePresenter {
         
         vc.modalPresentationStyle = .fullScreen
         vc.transitioningDelegate = self
-
+        
         animator?.fromFrame = fromFrame
         animator?.imageFrame = imageFrame
         
+        interactor?.scrollPan = vc.scrollView.panGestureRecognizer
         interactor?.attachToVC(vc: vc, view: vc.view)
         
         parent?.present(vc, animated: true)

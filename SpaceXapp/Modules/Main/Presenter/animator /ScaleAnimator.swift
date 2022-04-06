@@ -38,25 +38,63 @@ final class ScaleAnimator: NSObject, UIViewControllerAnimatedTransitioning {
     }
     
     private func present(using context: UIViewControllerContextTransitioning) {
+        switch UIDevice.current.orientation {
+        case .portrait, .portraitUpsideDown: presentForPortrait(using: context)
+        case.landscapeLeft,.landscapeRight: presentForLandScape(using: context)
+        default: presentForLandScape(using: context)
+        }
+    }
+    
+    private func presentForLandScape(using context: UIViewControllerContextTransitioning) {
+        guard let toVC = context.viewController (forKey: .to) as? DetailViewController else { fatalError() }
+        
+        context.containerView.addSubview(toVC.view)
+        
+        toVC.view.transform = .init(scaleX: 0.5, y: 0.5)
+        toVC.view.alpha = 0
+        
+        UIView.animate(withDuration: duration,
+                       delay: 0,
+                       usingSpringWithDamping: 1,
+                       initialSpringVelocity: 1,
+                       options: .curveLinear)  {
+            toVC.view.transform = .identity
+            toVC.view.alpha = 1
+            
+        } completion: { complete in
+            if context.transitionWasCancelled {
+                context.completeTransition(false)
+            } else {
+                context.completeTransition(true)
+            }
+        }
+    }
+    
+    private func presentForPortrait(using context: UIViewControllerContextTransitioning) {
         guard let toVC = context.viewController (forKey: .to) as? DetailViewController else { fatalError() }
         
         context.containerView.addSubview(toVC.view)
         
         let frame = UIScreen.main.bounds
             
-        toVC.galeryCollectionView.transform = .init(scaleX: imageFrame.width / frame.width,
+        toVC.galeryCollectionView.view.transform = .init(scaleX: imageFrame.width / frame.width,
                                                          y: imageFrame.width / frame.width)
-        toVC.galeryCollectionView.layer.cornerRadius = 10
-        toVC.galeryCollectionView.layer.masksToBounds = true
+        toVC.galeryCollectionView.view.layer.cornerRadius = 10
+        toVC.galeryCollectionView.view.layer.masksToBounds = true
         toVC.view.frame = fromFrame
         
         toVC.crewView.view.isHidden = true
         toVC.detailInfoView.alpha = 0
         
-        UIView.animate(withDuration: duration, delay: 0, usingSpringWithDamping: 1, initialSpringVelocity: 1, options: .curveLinear)  {
+        UIView.animate(withDuration: duration,
+                       delay: 0,
+                       usingSpringWithDamping: 0.9,
+                       initialSpringVelocity: 0.1,
+                       options: .curveEaseOut)  {
+            
             toVC.view.frame = UIScreen.main.bounds
-            toVC.galeryCollectionView.layer.cornerRadius = 0
-            toVC.galeryCollectionView.transform = .identity
+            toVC.galeryCollectionView.view.layer.cornerRadius = 0
+            toVC.galeryCollectionView.view.transform = .identity
             
             toVC.detailInfoView.alpha = 1
         } completion: { complete in
@@ -69,16 +107,24 @@ final class ScaleAnimator: NSObject, UIViewControllerAnimatedTransitioning {
         }
     }
     
-    private func dismiss(using context: UIViewControllerContextTransitioning){
-        guard let fromVC = context.viewController (forKey: .from) as? DetailViewController,
-              let toVC = context.viewController(forKey: .to)
+    
+    private func dismiss(using context: UIViewControllerContextTransitioning) {
+        guard
+            let fromVC = context.viewController(forKey: .from) as? DetailViewController,
+            let toVC = context.viewController(forKey: .to)
         else { fatalError() }
         
         context.containerView.addSubview(fromVC.view)
-        context.containerView.insertSubview(toVC.view, belowSubview: fromVC.view)
+        context.containerView.insertSubview(toVC.view,
+                                            belowSubview: fromVC.view)
         
-        UIView.animate(withDuration: duration, delay: 0, usingSpringWithDamping: 1, initialSpringVelocity: 1, options: .curveLinear)  {
-            fromVC.view.transform = .init(translationX: 0, y: UIScreen.main.bounds.height / 1.25)
+        UIView.animate(withDuration: duration,
+                       delay: 0,
+                       usingSpringWithDamping: 1,
+                       initialSpringVelocity: 1,
+                       options: .curveLinear)  {
+            
+            fromVC.view.transform = .init(scaleX: 0.5, y: 0.5)
             fromVC.view.alpha = 0
         } completion: { complete in
             if context.transitionWasCancelled {

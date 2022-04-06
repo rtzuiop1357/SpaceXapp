@@ -16,10 +16,6 @@ final class DetailViewController: BaseViewController<Flight> {
         return scrollView
     }()
     
-    lazy var panGesture: UIPanGestureRecognizer = {
-        return UIPanGestureRecognizer(target: self, action: #selector(dismissPanAction))
-    }()
-    
     lazy var detailInfoView: DetailInfoView = {
         let view = DetailInfoView()
         view.translatesAutoresizingMaskIntoConstraints = false
@@ -37,9 +33,9 @@ final class DetailViewController: BaseViewController<Flight> {
         return btn
     }()
     
-    lazy var galeryCollectionView: SwiftUIView<DetailGaleryView<DetailViewModel>> = {
-        let galery = SwiftUIView(DetailGaleryView<DetailViewModel>(viewModel: viewModel as! DetailViewModel))
-        galery.translatesAutoresizingMaskIntoConstraints = false
+    lazy var galeryCollectionView: UIHostingController<DetailGaleryView> = {
+        let galery = UIHostingController(rootView: DetailGaleryView(viewModel: viewModel as! DetailViewModel))
+        galery.view?.translatesAutoresizingMaskIntoConstraints = false
         return galery
     }()
     
@@ -66,8 +62,6 @@ final class DetailViewController: BaseViewController<Flight> {
         navigationController?.navigationBar.prefersLargeTitles = false
         
         scrollView.delegate = self
-
-        view.addGestureRecognizer(panGesture)
         
         if hasCrew {
             crewView.createDataSource()
@@ -92,7 +86,7 @@ final class DetailViewController: BaseViewController<Flight> {
     override func addViews() {
         view.addSubview(scrollView)
         scrollView.addSubview(stackView)
-        stackView.addSubview(galeryCollectionView)
+        stackView.addSubview(galeryCollectionView.view)
         stackView.addSubview(detailInfoView)
         stackView.addSubview(crewView.view)
         stackView.addSubview(dismissBTN)
@@ -100,25 +94,37 @@ final class DetailViewController: BaseViewController<Flight> {
     
     override func addConstrainghts() {
         scrollView.sameConstrainghts(as: view)
+        scrollView.contentInsetAdjustmentBehavior = .never
+        scrollView.contentInset = .init(top: 0.0, left: 0.0, bottom: 0.0, right: 0.0)
         stackView.sameConstrainghts(as: scrollView)
         
         NSLayoutConstraint.activate([
-            
-            dismissBTN.topAnchor.constraint(equalTo: view.topAnchor, constant: 25),
+            dismissBTN.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor, constant: 10),
             dismissBTN.leftAnchor.constraint(equalTo: stackView.leftAnchor, constant: 10),
             dismissBTN.widthAnchor.constraint(equalToConstant: 30),
-            dismissBTN.heightAnchor.constraint(equalToConstant: 30),
-            
-            galeryCollectionView.topAnchor.constraint(equalTo: stackView.topAnchor),
-            galeryCollectionView.leftAnchor.constraint(equalTo: stackView.leftAnchor),
-            galeryCollectionView.rightAnchor.constraint(equalTo: stackView.rightAnchor),
-            galeryCollectionView.heightAnchor.constraint(equalToConstant: 400),
-            
-            detailInfoView.topAnchor.constraint(equalTo: galeryCollectionView.bottomAnchor),
+            dismissBTN.heightAnchor.constraint(equalToConstant: 30)
+        ])
+        
+        let screen = UIScreen.main.bounds
+        let height = min(screen.height, screen.width)
+        NSLayoutConstraint.activate([
+            galeryCollectionView.view.topAnchor.constraint(equalTo: stackView.topAnchor),
+            galeryCollectionView.view.leftAnchor.constraint(equalTo: stackView.leftAnchor),
+            galeryCollectionView.view.rightAnchor.constraint(equalTo: stackView.rightAnchor),
+            galeryCollectionView.view.centerXAnchor.constraint(equalTo: stackView.centerXAnchor),
+            galeryCollectionView.view.widthAnchor.constraint(equalTo: stackView.widthAnchor),
+            galeryCollectionView.view.heightAnchor.constraint(equalToConstant: height),
+        ])
+        
+        NSLayoutConstraint.activate([
+
+            detailInfoView.topAnchor.constraint(equalTo: galeryCollectionView.view.bottomAnchor),
             detailInfoView.leftAnchor.constraint(equalTo: stackView.leftAnchor),
             detailInfoView.rightAnchor.constraint(equalTo: stackView.rightAnchor),
             detailInfoView.widthAnchor.constraint(equalTo: stackView.widthAnchor),
-            
+        ])
+        
+        NSLayoutConstraint.activate([
             crewView.view.topAnchor.constraint(equalTo: detailInfoView.bottomAnchor,
                                                constant: 5),
             crewView.view.leftAnchor.constraint(equalTo: stackView.leftAnchor),
@@ -135,31 +141,28 @@ final class DetailViewController: BaseViewController<Flight> {
         
     }
     
-    @objc private func dismissBTNpressed() {
+    @objc private
+    func dismissBTNpressed() {
         dismiss(animated: false)
-    }
-    
-    @objc private func dismissPanAction(_ sender: UIPanGestureRecognizer? = nil) {
-        if (sender?.translation(in: self.view).y)! > 100 { dismiss(animated: false) }
     }
     
     override func setUpBindings() {
         guard let viewModel = viewModel as? DetailViewModel else { return }
         
-        viewModel.$dateString.sink { text in
-            self.detailInfoView.dateLabel.text = text
+        viewModel.$dateString.sink { [weak self] text in
+            self?.detailInfoView.dateLabel.text = text
         }.store(in: &cancellables)
         
-        viewModel.$detail.sink { text in
-            self.detailInfoView.detailLabel.text = text
+        viewModel.$detail.sink { [weak self] text in
+            self?.detailInfoView.detailLabel.text = text
         }.store(in: &cancellables)
         
-        viewModel.$name.sink { text in
-            self.detailInfoView.nameLabel.text = text
+        viewModel.$name.sink { [weak self] text in
+            self?.detailInfoView.nameLabel.text = text
         }.store(in: &cancellables)
         
-        viewModel.$failiureText.sink { text in
-            self.detailInfoView.failiureLabel.text = text
+        viewModel.$failiureText.sink { [weak self] text in
+            self?.detailInfoView.failiureLabel.text = text
         }.store(in: &cancellables)
     }
     
@@ -178,6 +181,7 @@ final class DetailViewController: BaseViewController<Flight> {
             subitem: item,
             count: viewModel.images.count > 1 ? viewModel.images.count : 1
         )
+        
         let section = NSCollectionLayoutSection(group: group)
         let layout = UICollectionViewCompositionalLayout(section: section)
         return layout
@@ -186,6 +190,6 @@ final class DetailViewController: BaseViewController<Flight> {
 
 extension DetailViewController: UIScrollViewDelegate {
     func scrollViewDidScroll(_ scrollView: UIScrollView) {
-        if scrollView.contentOffset.y < -100 { self.dismiss(animated: true) }
+        NotificationCenter.default.post(name: .scrollViewScrolled, object: scrollView.contentOffset)
     }
 }

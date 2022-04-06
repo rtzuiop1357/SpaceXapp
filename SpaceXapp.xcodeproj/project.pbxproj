@@ -8,6 +8,7 @@
 
 /* Begin PBXBuildFile section */
 		7908029C27E50E2500AC9436 /* BaseCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7908029B27E50E2500AC9436 /* BaseCell.swift */; };
+		790CB18A27F77DC70042E965 /* NotificationNames.swift in Sources */ = {isa = PBXBuildFile; fileRef = 790CB18927F77DC70042E965 /* NotificationNames.swift */; };
 		791CB4AE27E7ABCD009F23CE /* CrewViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 791CB4AD27E7ABCD009F23CE /* CrewViewModel.swift */; };
 		792215E927E27A1800E72ABA /* DetailCrewViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 792215E827E27A1800E72ABA /* DetailCrewViewController.swift */; };
 		792215EB27E27AF900E72ABA /* CrewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 792215EA27E27AF900E72ABA /* CrewModel.swift */; };
@@ -26,7 +27,7 @@
 		79C561AA27DFC2C400269C72 /* DetailViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 79C5619127DFC2C400269C72 /* DetailViewModel.swift */; };
 		79C561AB27DFC2C400269C72 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 79C5619327DFC2C400269C72 /* ViewController.swift */; };
 		79C561AC27DFC2C400269C72 /* MainViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 79C5619427DFC2C400269C72 /* MainViewModel.swift */; };
-		79C561AE27DFC2C400269C72 /* MainTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 79C5619627DFC2C400269C72 /* MainTableViewCell.swift */; };
+		79C561AE27DFC2C400269C72 /* MainCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 79C5619627DFC2C400269C72 /* MainCollectionViewCell.swift */; };
 		79C561AF27DFC2C400269C72 /* DetailInfoView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 79C5619727DFC2C400269C72 /* DetailInfoView.swift */; };
 		79C561B027DFC2C400269C72 /* BaseViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 79C5619927DFC2C400269C72 /* BaseViewController.swift */; };
 		79C561B127DFC2C400269C72 /* BaseViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 79C5619A27DFC2C400269C72 /* BaseViewModel.swift */; };
@@ -49,6 +50,7 @@
 
 /* Begin PBXFileReference section */
 		7908029B27E50E2500AC9436 /* BaseCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BaseCell.swift; sourceTree = "<group>"; };
+		790CB18927F77DC70042E965 /* NotificationNames.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NotificationNames.swift; sourceTree = "<group>"; };
 		791CB4AD27E7ABCD009F23CE /* CrewViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CrewViewModel.swift; sourceTree = "<group>"; };
 		792215E827E27A1800E72ABA /* DetailCrewViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DetailCrewViewController.swift; sourceTree = "<group>"; };
 		792215EA27E27AF900E72ABA /* CrewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CrewModel.swift; sourceTree = "<group>"; };
@@ -68,7 +70,7 @@
 		79C5619127DFC2C400269C72 /* DetailViewModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DetailViewModel.swift; sourceTree = "<group>"; };
 		79C5619327DFC2C400269C72 /* ViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
 		79C5619427DFC2C400269C72 /* MainViewModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MainViewModel.swift; sourceTree = "<group>"; };
-		79C5619627DFC2C400269C72 /* MainTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MainTableViewCell.swift; sourceTree = "<group>"; };
+		79C5619627DFC2C400269C72 /* MainCollectionViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MainCollectionViewCell.swift; sourceTree = "<group>"; };
 		79C5619727DFC2C400269C72 /* DetailInfoView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DetailInfoView.swift; sourceTree = "<group>"; };
 		79C5619927DFC2C400269C72 /* BaseViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BaseViewController.swift; sourceTree = "<group>"; };
 		79C5619A27DFC2C400269C72 /* BaseViewModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BaseViewModel.swift; sourceTree = "<group>"; };
@@ -121,7 +123,7 @@
 		790CB18727F773480042E965 /* View */ = {
 			isa = PBXGroup;
 			children = (
-				79C5619627DFC2C400269C72 /* MainTableViewCell.swift */,
+				79C5619627DFC2C400269C72 /* MainCollectionViewCell.swift */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -168,7 +170,6 @@
 			children = (
 				79F6380127E23894003C2A94 /* DetailGaleryView.swift */,
 				79C5619727DFC2C400269C72 /* DetailInfoView.swift */,
-				791CB4AF27E7ABD4009F23CE /* CrewView */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -237,6 +238,7 @@
 			isa = PBXGroup;
 			children = (
 				791CB4B027E7ACEE009F23CE /* DetailView */,
+				791CB4AF27E7ABD4009F23CE /* CrewView */,
 			);
 			path = Detail;
 			sourceTree = "<group>";
@@ -273,6 +275,7 @@
 				79C5619E27DFC2C400269C72 /* UIViewControllerExtension.swift */,
 				79C5619F27DFC2C400269C72 /* CustomColors.swift */,
 				79C561A027DFC2C400269C72 /* UIImageExtensions.swift */,
+				790CB18927F77DC70042E965 /* NotificationNames.swift */,
 			);
 			path = Extensions;
 			sourceTree = "<group>";
@@ -408,13 +411,14 @@
 				79B6E10427E12A90004321A2 /* ViewExtensions.swift in Sources */,
 				79C5617727DFC29E00269C72 /* SceneDelegate.swift in Sources */,
 				7908029C27E50E2500AC9436 /* BaseCell.swift in Sources */,
-				79C561AE27DFC2C400269C72 /* MainTableViewCell.swift in Sources */,
+				79C561AE27DFC2C400269C72 /* MainCollectionViewCell.swift in Sources */,
 				79C561AB27DFC2C400269C72 /* ViewController.swift in Sources */,
 				79C561B227DFC2C400269C72 /* BaseView.swift in Sources */,
 				792215EB27E27AF900E72ABA /* CrewModel.swift in Sources */,
 				79C561B527DFC2C400269C72 /* CustomColors.swift in Sources */,
 				79C561C027DFC55A00269C72 /* FlightModel.swift in Sources */,
 				79E384FB27EE5375007FB571 /* MainPresenter.swift in Sources */,
+				790CB18A27F77DC70042E965 /* NotificationNames.swift in Sources */,
 				79C561AC27DFC2C400269C72 /* MainViewModel.swift in Sources */,
 				791CB4AE27E7ABCD009F23CE /* CrewViewModel.swift in Sources */,
 			);
