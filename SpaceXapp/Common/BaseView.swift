@@ -17,6 +17,13 @@ class BaseView<T>: UIView {
         addViews()
         addConstraints()
         self.viewModel = viewModel
+        
+        NotificationCenter.default.addObserver(forName: .changedOrientation, object: nil, queue: nil) { _ in
+            self.constraints.forEach({ constrainght in
+                self.removeConstraint(constrainght)
+            })
+            self.addConstraints()
+        }
     }
     
     required init?(coder: NSCoder) {

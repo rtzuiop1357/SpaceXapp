@@ -36,3 +36,5 @@ extension UIImage {
         return scaledImage
     }
 }
+
+extension UIImage: Identifiable {}

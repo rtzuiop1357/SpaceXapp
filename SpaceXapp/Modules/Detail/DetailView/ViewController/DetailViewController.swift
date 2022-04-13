@@ -19,6 +19,7 @@ final class DetailViewController: BaseViewController<Flight> {
     lazy var detailInfoView: DetailInfoView = {
         let view = DetailInfoView()
         view.translatesAutoresizingMaskIntoConstraints = false
+        view.insetsLayoutMarginsFromSafeArea = true
         return view
     }()
     
@@ -33,9 +34,10 @@ final class DetailViewController: BaseViewController<Flight> {
         return btn
     }()
     
-    lazy var galeryCollectionView: UIHostingController<DetailGaleryView> = {
-        let galery = UIHostingController(rootView: DetailGaleryView(viewModel: viewModel as! DetailViewModel))
-        galery.view?.translatesAutoresizingMaskIntoConstraints = false
+    lazy var galeryCollectionView: GaleryView = {
+       let galery = GaleryView()
+        galery.translatesAutoresizingMaskIntoConstraints = false
+        
         return galery
     }()
     
@@ -55,6 +57,11 @@ final class DetailViewController: BaseViewController<Flight> {
     
     private let hasCrew: Bool
         
+    override func viewWillTransition(to size: CGSize, with coordinator: UIViewControllerTransitionCoordinator) {
+        super.viewWillTransition(to: size, with: coordinator)
+        galeryCollectionView.collectionView.setCollectionViewLayout(createLayout(), animated: true)
+    }
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         // Do any additional setup after loading the view.
@@ -62,7 +69,7 @@ final class DetailViewController: BaseViewController<Flight> {
         navigationController?.navigationBar.prefersLargeTitles = false
         
         scrollView.delegate = self
-        
+                
         if hasCrew {
             crewView.createDataSource()
         }
@@ -77,6 +84,8 @@ final class DetailViewController: BaseViewController<Flight> {
         if hasCrew {
             crewView.configure(data: flight.crew)
         }
+        
+        galeryCollectionView.configure(data: [], viewModel: viewModel)
     }
     
     required init?(coder: NSCoder) {
@@ -86,7 +95,7 @@ final class DetailViewController: BaseViewController<Flight> {
     override func addViews() {
         view.addSubview(scrollView)
         scrollView.addSubview(stackView)
-        stackView.addSubview(galeryCollectionView.view)
+        stackView.addSubview(galeryCollectionView)
         stackView.addSubview(detailInfoView)
         stackView.addSubview(crewView.view)
         stackView.addSubview(dismissBTN)
@@ -108,17 +117,17 @@ final class DetailViewController: BaseViewController<Flight> {
         let screen = UIScreen.main.bounds
         let height = min(screen.height, screen.width)
         NSLayoutConstraint.activate([
-            galeryCollectionView.view.topAnchor.constraint(equalTo: stackView.topAnchor),
-            galeryCollectionView.view.leftAnchor.constraint(equalTo: stackView.leftAnchor),
-            galeryCollectionView.view.rightAnchor.constraint(equalTo: stackView.rightAnchor),
-            galeryCollectionView.view.centerXAnchor.constraint(equalTo: stackView.centerXAnchor),
-            galeryCollectionView.view.widthAnchor.constraint(equalTo: stackView.widthAnchor),
-            galeryCollectionView.view.heightAnchor.constraint(equalToConstant: height),
+            galeryCollectionView.topAnchor.constraint(equalTo: stackView.topAnchor),
+            galeryCollectionView.leftAnchor.constraint(equalTo: stackView.leftAnchor),
+            galeryCollectionView.rightAnchor.constraint(equalTo: stackView.rightAnchor),
+            galeryCollectionView.centerXAnchor.constraint(equalTo: stackView.centerXAnchor),
+            galeryCollectionView.widthAnchor.constraint(equalTo: stackView.widthAnchor),
+            galeryCollectionView.heightAnchor.constraint(equalToConstant: height),
         ])
         
         NSLayoutConstraint.activate([
 
-            detailInfoView.topAnchor.constraint(equalTo: galeryCollectionView.view.bottomAnchor),
+            detailInfoView.topAnchor.constraint(equalTo: galeryCollectionView.bottomAnchor),
             detailInfoView.leftAnchor.constraint(equalTo: stackView.leftAnchor),
             detailInfoView.rightAnchor.constraint(equalTo: stackView.rightAnchor),
             detailInfoView.widthAnchor.constraint(equalTo: stackView.widthAnchor),

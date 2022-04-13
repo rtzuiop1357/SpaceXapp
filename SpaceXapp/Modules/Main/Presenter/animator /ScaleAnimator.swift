@@ -77,10 +77,10 @@ final class ScaleAnimator: NSObject, UIViewControllerAnimatedTransitioning {
         
         let frame = UIScreen.main.bounds
             
-        toVC.galeryCollectionView.view.transform = .init(scaleX: imageFrame.width / frame.width,
+        toVC.galeryCollectionView.transform = .init(scaleX: imageFrame.width / frame.width,
                                                          y: imageFrame.width / frame.width)
-        toVC.galeryCollectionView.view.layer.cornerRadius = 10
-        toVC.galeryCollectionView.view.layer.masksToBounds = true
+        toVC.galeryCollectionView.layer.cornerRadius = 10
+        toVC.galeryCollectionView.layer.masksToBounds = true
         toVC.view.frame = fromFrame
         
         toVC.crewView.view.isHidden = true
@@ -93,8 +93,8 @@ final class ScaleAnimator: NSObject, UIViewControllerAnimatedTransitioning {
                        options: .curveEaseOut)  {
             
             toVC.view.frame = UIScreen.main.bounds
-            toVC.galeryCollectionView.view.layer.cornerRadius = 0
-            toVC.galeryCollectionView.view.transform = .identity
+            toVC.galeryCollectionView.layer.cornerRadius = 0
+            toVC.galeryCollectionView.transform = .identity
             
             toVC.detailInfoView.alpha = 1
         } completion: { complete in

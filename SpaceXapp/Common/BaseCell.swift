@@ -7,7 +7,7 @@
 
 import UIKit
 
-class BaseCell: UICollectionViewCell {
+class BaseCell<T>: UICollectionViewCell {
     init() {
         super.init(frame: .zero)
         addViews()
@@ -28,5 +28,5 @@ class BaseCell: UICollectionViewCell {
     
     func addConstraints() { fatalError() }
     
-    func configure<T>(data: T) { fatalError() }
+    func configure(data: T) { fatalError() }
 }

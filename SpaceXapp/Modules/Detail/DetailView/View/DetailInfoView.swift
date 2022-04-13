@@ -67,18 +67,19 @@ class DetailInfoView: BaseView<Flight> {
     }
     
     override func addConstraints() {
+        let window = UIApplication.shared.windows.first
+        let safearea = window!.safeAreaInsets
+        
         NSLayoutConstraint.activate([
-            
             stackView.topAnchor.constraint(equalTo: topAnchor),
             stackView.bottomAnchor.constraint(equalTo: bottomAnchor),
-            stackView.leftAnchor.constraint(equalTo: leftAnchor),
-            stackView.rightAnchor.constraint(equalTo: rightAnchor),
-            stackView.widthAnchor.constraint(equalTo: widthAnchor),
+            stackView.centerXAnchor.constraint(equalTo: centerXAnchor),
+            stackView.widthAnchor.constraint(equalTo: widthAnchor, constant: -(safearea.right + safearea.left)),
             
             nameLabel.leftAnchor.constraint(equalTo: stackView.leftAnchor,constant: 15),
             nameLabel.topAnchor.constraint(equalTo: stackView.topAnchor,constant: 7),
             
-            dateLabel.leftAnchor.constraint(equalTo: leftAnchor, constant: 15),
+            dateLabel.leftAnchor.constraint(equalTo: stackView.leftAnchor, constant: 15),
             dateLabel.topAnchor.constraint(equalTo: nameLabel.bottomAnchor,constant: 7),
             
             failiureLabel.leftAnchor.constraint(equalTo: stackView.leftAnchor,constant: 15),

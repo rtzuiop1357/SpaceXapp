@@ -14,7 +14,9 @@ protocol DetailViewModelProtocol: BaseViewModel<Flight> {
     var failiureText: String { get set }
     var dateString: String { get set }
     var images: [ImageObject] { get set }
- 
+    
+    var imagesPublisher: Published<[ImageObject]>.Publisher { get }
+    
     var id: String { get set }
 
     func configure(data: Flight)

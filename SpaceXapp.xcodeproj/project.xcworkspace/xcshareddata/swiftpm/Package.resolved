@@ -1,25 +1,14 @@
 {
-  "object": {
-    "pins": [
-      {
-        "package": "Alamofire",
-        "repositoryURL": "https://github.com/Alamofire/Alamofire.git",
-        "state": {
-          "branch": "master",
-          "revision": "6eeff3c57e02f07c8494433aed8bf90532010089",
-          "version": null
-        }
-      },
-      {
-        "package": "Swinject",
-        "repositoryURL": "https://github.com/Swinject/Swinject.git",
-        "state": {
-          "branch": "master",
-          "revision": "f10b6e9ebff440f985c43008f7c2d097639fcb81",
-          "version": null
-        }
+  "pins" : [
+    {
+      "identity" : "alamofire",
+      "kind" : "remoteSourceControl",
+      "location" : "https://github.com/Alamofire/Alamofire.git",
+      "state" : {
+        "branch" : "master",
+        "revision" : "6eeff3c57e02f07c8494433aed8bf90532010089"
       }
-    ]
-  },
-  "version": 1
+    }
+  ],
+  "version" : 2
 }

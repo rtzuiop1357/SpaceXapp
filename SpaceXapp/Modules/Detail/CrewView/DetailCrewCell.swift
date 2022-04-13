@@ -7,7 +7,7 @@
 
 import UIKit
 
-final class DetailCrewCell: BaseCell {
+final class DetailCrewCell: BaseCell<Crew> {
 
     static let identifier = "CrewCell"
     
@@ -42,10 +42,9 @@ final class DetailCrewCell: BaseCell {
         imageView.layer.cornerRadius = imageView.frame.width / 2
     }
     
-    override func configure<T>(data: T) {
-        guard let crew = data as? Crew else { return }
-        nameLabel.text = crew.name
-        agencyLabel.text = crew.agency
+    override func configure(data: Crew) {
+        nameLabel.text = data.name
+        agencyLabel.text = data.agency
     }
     
     func setImage(_ image: UIImage) {

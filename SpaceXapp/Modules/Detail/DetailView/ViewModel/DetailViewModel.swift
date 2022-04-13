@@ -20,6 +20,8 @@ final class DetailViewModel: BaseViewModel<Flight>,
     @Published var dateString: String = ""
     @Published var images: [ImageObject] = []
     
+    var imagesPublisher: Published<[ImageObject]>.Publisher { $images}
+    
     var id: String = ""
     
     override func configure(data: Flight) {

@@ -10,4 +10,6 @@ import Foundation
 
 extension Notification.Name {
     static let scrollViewScrolled = Notification.Name("scrollViewScrolled")
+    
+    static let changedOrientation = Notification.Name("changedOrientation")
 }

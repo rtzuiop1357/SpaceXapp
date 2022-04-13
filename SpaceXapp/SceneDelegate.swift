@@ -24,5 +24,9 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
         window?.rootViewController = navVC
         window?.makeKeyAndVisible()
     }
+    
+    func windowScene(_ windowScene: UIWindowScene, didUpdate previousCoordinateSpace: UICoordinateSpace, interfaceOrientation previousInterfaceOrientation: UIInterfaceOrientation, traitCollection previousTraitCollection: UITraitCollection) {
+        NotificationCenter.default.post(name: .changedOrientation, object: nil)
+    }
 }
 

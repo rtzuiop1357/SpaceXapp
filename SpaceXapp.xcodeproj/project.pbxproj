@@ -9,6 +9,10 @@
 /* Begin PBXBuildFile section */
 		7908029C27E50E2500AC9436 /* BaseCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7908029B27E50E2500AC9436 /* BaseCell.swift */; };
 		790CB18A27F77DC70042E965 /* NotificationNames.swift in Sources */ = {isa = PBXBuildFile; fileRef = 790CB18927F77DC70042E965 /* NotificationNames.swift */; };
+		7914C21728034CB30049E1CC /* BaseCollectionViewDatasource.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7914C21628034CB30049E1CC /* BaseCollectionViewDatasource.swift */; };
+		7914C21928034E3D0049E1CC /* BaseCollectionView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7914C21828034E3D0049E1CC /* BaseCollectionView.swift */; };
+		7914C21D28034EFC0049E1CC /* GaleryView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7914C21C28034EFC0049E1CC /* GaleryView.swift */; };
+		7914C21F28034F0D0049E1CC /* GaleryCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7914C21E28034F0D0049E1CC /* GaleryCell.swift */; };
 		791CB4AE27E7ABCD009F23CE /* CrewViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 791CB4AD27E7ABCD009F23CE /* CrewViewModel.swift */; };
 		792215E927E27A1800E72ABA /* DetailCrewViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 792215E827E27A1800E72ABA /* DetailCrewViewController.swift */; };
 		792215EB27E27AF900E72ABA /* CrewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 792215EA27E27AF900E72ABA /* CrewModel.swift */; };
@@ -17,7 +21,6 @@
 		79A5DA0227F4C4E7006F02B5 /* SwiftUIViewWrapper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 79A5DA0127F4C4E7006F02B5 /* SwiftUIViewWrapper.swift */; };
 		79A5DA0427F4D4A4006F02B5 /* DetailViewModelProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = 79A5DA0327F4D4A3006F02B5 /* DetailViewModelProtocol.swift */; };
 		79A5DA0627F4E27C006F02B5 /* MainViewModelProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = 79A5DA0527F4E27C006F02B5 /* MainViewModelProtocol.swift */; };
-		79B6E0FE27E125A6004321A2 /* Swinject in Frameworks */ = {isa = PBXBuildFile; productRef = 79B6E0FD27E125A6004321A2 /* Swinject */; };
 		79B6E10427E12A90004321A2 /* ViewExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 79B6E10327E12A90004321A2 /* ViewExtensions.swift */; };
 		79C5617527DFC29E00269C72 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 79C5617427DFC29E00269C72 /* AppDelegate.swift */; };
 		79C5617727DFC29E00269C72 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 79C5617627DFC29E00269C72 /* SceneDelegate.swift */; };
@@ -43,7 +46,6 @@
 		79E384F727EE535E007FB571 /* ScaleAnimator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 79E384F627EE535E007FB571 /* ScaleAnimator.swift */; };
 		79E384FB27EE5375007FB571 /* MainPresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 79E384FA27EE5375007FB571 /* MainPresenter.swift */; };
 		79E384FD27EE53A4007FB571 /* BasePresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 79E384FC27EE53A4007FB571 /* BasePresenter.swift */; };
-		79F6380227E23894003C2A94 /* DetailGaleryView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 79F6380127E23894003C2A94 /* DetailGaleryView.swift */; };
 		79F6380527E2547A003C2A94 /* ImageStorage.swift in Sources */ = {isa = PBXBuildFile; fileRef = 79F6380427E2547A003C2A94 /* ImageStorage.swift */; };
 		79F6380727E25B22003C2A94 /* ImageObject.swift in Sources */ = {isa = PBXBuildFile; fileRef = 79F6380627E25B22003C2A94 /* ImageObject.swift */; };
 /* End PBXBuildFile section */
@@ -51,6 +53,10 @@
 /* Begin PBXFileReference section */
 		7908029B27E50E2500AC9436 /* BaseCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BaseCell.swift; sourceTree = "<group>"; };
 		790CB18927F77DC70042E965 /* NotificationNames.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NotificationNames.swift; sourceTree = "<group>"; };
+		7914C21628034CB30049E1CC /* BaseCollectionViewDatasource.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BaseCollectionViewDatasource.swift; sourceTree = "<group>"; };
+		7914C21828034E3D0049E1CC /* BaseCollectionView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BaseCollectionView.swift; sourceTree = "<group>"; };
+		7914C21C28034EFC0049E1CC /* GaleryView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GaleryView.swift; sourceTree = "<group>"; };
+		7914C21E28034F0D0049E1CC /* GaleryCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GaleryCell.swift; sourceTree = "<group>"; };
 		791CB4AD27E7ABCD009F23CE /* CrewViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CrewViewModel.swift; sourceTree = "<group>"; };
 		792215E827E27A1800E72ABA /* DetailCrewViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DetailCrewViewController.swift; sourceTree = "<group>"; };
 		792215EA27E27AF900E72ABA /* CrewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CrewModel.swift; sourceTree = "<group>"; };
@@ -85,7 +91,6 @@
 		79E384F627EE535E007FB571 /* ScaleAnimator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ScaleAnimator.swift; sourceTree = "<group>"; };
 		79E384FA27EE5375007FB571 /* MainPresenter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainPresenter.swift; sourceTree = "<group>"; };
 		79E384FC27EE53A4007FB571 /* BasePresenter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BasePresenter.swift; sourceTree = "<group>"; };
-		79F6380127E23894003C2A94 /* DetailGaleryView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DetailGaleryView.swift; sourceTree = "<group>"; };
 		79F6380427E2547A003C2A94 /* ImageStorage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImageStorage.swift; sourceTree = "<group>"; };
 		79F6380627E25B22003C2A94 /* ImageObject.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImageObject.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -96,7 +101,6 @@
 			buildActionMask = 2147483647;
 			files = (
 				79C561BD27DFC45100269C72 /* Alamofire in Frameworks */,
-				79B6E0FE27E125A6004321A2 /* Swinject in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -137,6 +141,15 @@
 			path = Presenter;
 			sourceTree = "<group>";
 		};
+		7914C21B28034EEB0049E1CC /* GaleryView */ = {
+			isa = PBXGroup;
+			children = (
+				7914C21C28034EFC0049E1CC /* GaleryView.swift */,
+				7914C21E28034F0D0049E1CC /* GaleryCell.swift */,
+			);
+			path = GaleryView;
+			sourceTree = "<group>";
+		};
 		791CB4AF27E7ABD4009F23CE /* CrewView */ = {
 			isa = PBXGroup;
 			children = (
@@ -168,7 +181,6 @@
 		799FA42727ECF1E100BC10AA /* View */ = {
 			isa = PBXGroup;
 			children = (
-				79F6380127E23894003C2A94 /* DetailGaleryView.swift */,
 				79C5619727DFC2C400269C72 /* DetailInfoView.swift */,
 			);
 			path = View;
@@ -237,6 +249,7 @@
 		79C5618F27DFC2C400269C72 /* Detail */ = {
 			isa = PBXGroup;
 			children = (
+				7914C21B28034EEB0049E1CC /* GaleryView */,
 				791CB4B027E7ACEE009F23CE /* DetailView */,
 				791CB4AF27E7ABD4009F23CE /* CrewView */,
 			);
@@ -261,6 +274,8 @@
 				79E384FC27EE53A4007FB571 /* BasePresenter.swift */,
 				79A5DA0127F4C4E7006F02B5 /* SwiftUIViewWrapper.swift */,
 				79C5619B27DFC2C400269C72 /* BaseView.swift */,
+				7914C21628034CB30049E1CC /* BaseCollectionViewDatasource.swift */,
+				7914C21828034E3D0049E1CC /* BaseCollectionView.swift */,
 				79C5619A27DFC2C400269C72 /* BaseViewModel.swift */,
 				7908029B27E50E2500AC9436 /* BaseCell.swift */,
 			);
@@ -326,7 +341,6 @@
 			name = SpaceXapp;
 			packageProductDependencies = (
 				79C561BC27DFC45100269C72 /* Alamofire */,
-				79B6E0FD27E125A6004321A2 /* Swinject */,
 			);
 			productName = SpaceXapp;
 			productReference = 79C5617127DFC29E00269C72 /* SpaceXapp.app */;
@@ -358,7 +372,6 @@
 			mainGroup = 79C5616827DFC29E00269C72;
 			packageReferences = (
 				79C561BB27DFC45100269C72 /* XCRemoteSwiftPackageReference "Alamofire" */,
-				79B6E0FC27E125A6004321A2 /* XCRemoteSwiftPackageReference "Swinject" */,
 			);
 			productRefGroup = 79C5617227DFC29E00269C72 /* Products */;
 			projectDirPath = "";
@@ -392,7 +405,6 @@
 				79C5617527DFC29E00269C72 /* AppDelegate.swift in Sources */,
 				79F6380727E25B22003C2A94 /* ImageObject.swift in Sources */,
 				793F30A327F632AE006564C2 /* ScaleInteractor.swift in Sources */,
-				79F6380227E23894003C2A94 /* DetailGaleryView.swift in Sources */,
 				79A5DA0627F4E27C006F02B5 /* MainViewModelProtocol.swift in Sources */,
 				792215ED27E27F3E00E72ABA /* DetailCrewCell.swift in Sources */,
 				79C561B627DFC2C400269C72 /* UIImageExtensions.swift in Sources */,
@@ -406,20 +418,24 @@
 				79C561B327DFC2C400269C72 /* UserDefaultsKeys.swift in Sources */,
 				79C561A827DFC2C400269C72 /* Networking.swift in Sources */,
 				79C561AA27DFC2C400269C72 /* DetailViewModel.swift in Sources */,
+				7914C21F28034F0D0049E1CC /* GaleryCell.swift in Sources */,
 				79C561A927DFC2C400269C72 /* DetailViewController.swift in Sources */,
 				79A5DA0227F4C4E7006F02B5 /* SwiftUIViewWrapper.swift in Sources */,
 				79B6E10427E12A90004321A2 /* ViewExtensions.swift in Sources */,
 				79C5617727DFC29E00269C72 /* SceneDelegate.swift in Sources */,
 				7908029C27E50E2500AC9436 /* BaseCell.swift in Sources */,
 				79C561AE27DFC2C400269C72 /* MainCollectionViewCell.swift in Sources */,
+				7914C21728034CB30049E1CC /* BaseCollectionViewDatasource.swift in Sources */,
 				79C561AB27DFC2C400269C72 /* ViewController.swift in Sources */,
 				79C561B227DFC2C400269C72 /* BaseView.swift in Sources */,
 				792215EB27E27AF900E72ABA /* CrewModel.swift in Sources */,
 				79C561B527DFC2C400269C72 /* CustomColors.swift in Sources */,
 				79C561C027DFC55A00269C72 /* FlightModel.swift in Sources */,
+				7914C21928034E3D0049E1CC /* BaseCollectionView.swift in Sources */,
 				79E384FB27EE5375007FB571 /* MainPresenter.swift in Sources */,
 				790CB18A27F77DC70042E965 /* NotificationNames.swift in Sources */,
 				79C561AC27DFC2C400269C72 /* MainViewModel.swift in Sources */,
+				7914C21D28034EFC0049E1CC /* GaleryView.swift in Sources */,
 				791CB4AE27E7ABCD009F23CE /* CrewViewModel.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -566,6 +582,7 @@
 				INFOPLIST_FILE = SpaceXapp/Info.plist;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchStoryboardName = LaunchScreen;
+				INFOPLIST_KEY_UISupportedInterfaceOrientations = "";
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = "UIInterfaceOrientationPortrait UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
 				IPHONEOS_DEPLOYMENT_TARGET = 14.0;
@@ -594,6 +611,7 @@
 				INFOPLIST_FILE = SpaceXapp/Info.plist;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchStoryboardName = LaunchScreen;
+				INFOPLIST_KEY_UISupportedInterfaceOrientations = "";
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = "UIInterfaceOrientationPortrait UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
 				IPHONEOS_DEPLOYMENT_TARGET = 14.0;
@@ -634,14 +652,6 @@
 /* End XCConfigurationList section */
 
 /* Begin XCRemoteSwiftPackageReference section */
-		79B6E0FC27E125A6004321A2 /* XCRemoteSwiftPackageReference "Swinject" */ = {
-			isa = XCRemoteSwiftPackageReference;
-			repositoryURL = "https://github.com/Swinject/Swinject.git";
-			requirement = {
-				branch = master;
-				kind = branch;
-			};
-		};
 		79C561BB27DFC45100269C72 /* XCRemoteSwiftPackageReference "Alamofire" */ = {
 			isa = XCRemoteSwiftPackageReference;
 			repositoryURL = "https://github.com/Alamofire/Alamofire.git";
@@ -653,11 +663,6 @@
 /* End XCRemoteSwiftPackageReference section */
 
 /* Begin XCSwiftPackageProductDependency section */
-		79B6E0FD27E125A6004321A2 /* Swinject */ = {
-			isa = XCSwiftPackageProductDependency;
-			package = 79B6E0FC27E125A6004321A2 /* XCRemoteSwiftPackageReference "Swinject" */;
-			productName = Swinject;
-		};
 		79C561BC27DFC45100269C72 /* Alamofire */ = {
 			isa = XCSwiftPackageProductDependency;
 			package = 79C561BB27DFC45100269C72 /* XCRemoteSwiftPackageReference "Alamofire" */;
