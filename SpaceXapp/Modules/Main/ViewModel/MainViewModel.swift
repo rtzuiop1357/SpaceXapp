@@ -17,7 +17,7 @@ final class MainViewModel: BaseViewModel<Any>, MainViewModelProtocol {
     
     fileprivate var idsOfFlights: [Flight] = []
     
-    @Published var filterByImage: Bool = false
+    @Published var filterByImage: Bool
         
     @Published var searchCollectionOfFlights: [Flight] = []
     
@@ -25,17 +25,16 @@ final class MainViewModel: BaseViewModel<Any>, MainViewModelProtocol {
     let imageStorage = ImageStorage.shared
     
     override init() {
+        filterByImage = UserDefaults.standard.filterByImage
+        
         super.init()
 
         bind()
-        
-        filterByImage = UserDefaults.standard.bool(forKey: UserDefaultsKeys.image.rawValue)
     }
     
     func bind() {
-        $filterByImage.sink { [unowned self] val in
-            UserDefaults.standard.set(val, forKey: UserDefaultsKeys.image.rawValue)
-            self.updateData(sort: true)
+        $filterByImage.sink { val in
+            UserDefaults.standard.filterByImage = val
         }.store(in: &cancellables)
     }
     
