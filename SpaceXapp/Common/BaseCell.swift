@@ -8,6 +8,7 @@
 import UIKit
 
 class BaseCell<T>: UICollectionViewCell {
+    
     init() {
         super.init(frame: .zero)
         addViews()

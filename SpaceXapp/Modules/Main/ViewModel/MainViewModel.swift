@@ -11,6 +11,7 @@ import Combine
 final class MainViewModel: BaseViewModel<Any>, MainViewModelProtocol {
     
     var filterByImagePublisher: Published<Bool>.Publisher { $filterByImage }
+    var searchCollectionPublisher: Published<[Flight]>.Publisher { $searchCollectionOfFlights }
     
     var sorted = ComparisonResult.orderedDescending
     
@@ -22,9 +23,6 @@ final class MainViewModel: BaseViewModel<Any>, MainViewModelProtocol {
     
     //custom image storage used for storing images that are shared between multiple views...
     let imageStorage = ImageStorage.shared
-     
-    var dataSource: UICollectionViewDiffableDataSource<Section,Flight.ID>? = nil
-    var snapshot = NSDiffableDataSourceSnapshot<Section,Flight.ID>()
     
     override init() {
         super.init()
@@ -39,20 +37,6 @@ final class MainViewModel: BaseViewModel<Any>, MainViewModelProtocol {
             UserDefaults.standard.set(val, forKey: UserDefaultsKeys.image.rawValue)
             self.updateData(sort: true)
         }.store(in: &cancellables)
-        
-        $searchCollectionOfFlights
-            .receive(on: DispatchQueue.main)
-            .sink { [weak self] flights in
-                guard let self = self else { return }
-                self.snapshot.deleteAllItems()
-                self.snapshot.appendSections([Section.main])
-            
-                let arrayofIDs = flights.map { $0.id }
-                self.snapshot.appendItems(arrayofIDs, toSection: .main)
-                
-                self.dataSource?.apply(self.snapshot, animatingDifferences: true)
-            }
-            .store(in: &cancellables)
     }
     
     func search(text: String) {
@@ -108,16 +92,6 @@ final class MainViewModel: BaseViewModel<Any>, MainViewModelProtocol {
                 }
             }
         }
-    }
-    
-    func setItemNeedsUpdate(id: Flight.ID) {
-        if #available(iOS 15.0, *) {
-            snapshot.reconfigureItems([id])
-        } else {
-            // Fallback on earlier versions
-            snapshot.reloadItems([id])
-        }
-        self.dataSource?.apply(snapshot, animatingDifferences: true)
     }
     
     func handleRefresh(_ completion: @escaping()-> Void) {

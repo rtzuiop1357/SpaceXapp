@@ -5,11 +5,13 @@
 //  Created by vojta on 10.04.2022.
 //
 
-import Foundation
+import Combine
 import UIKit
 
 class BaseCollectionView<T, Cell>: UIView where T: Identifiable,
                                                 Cell: BaseCell<T> {
+    
+    var cancellables: Set<AnyCancellable> = []
     
     lazy var collectionView: UICollectionView = {
         let collectionView = UICollectionView(frame: .zero, collectionViewLayout: createLayout())
@@ -41,8 +43,10 @@ class BaseCollectionView<T, Cell>: UIView where T: Identifiable,
         fatalError("init(coder:) has not been implemented")
     }
     
-    func configure(data: [T]) {
+    ///used fro updateing data in datasource of the collectionView
+    func updateData(data: [T]) {
         datasource?.data = data
+        datasource?.update()
     }
     
     func createDataSource() {

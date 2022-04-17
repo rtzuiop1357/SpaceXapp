@@ -236,8 +236,8 @@
             filePath = "SpaceXapp/Common/BaseCollectionView.swift"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "54"
-            endingLineNumber = "54"
+            startingLineNumber = "58"
+            endingLineNumber = "58"
             landmarkName = "createDataSource()"
             landmarkType = "7">
          </BreakpointContent>
@@ -271,6 +271,22 @@
             startingLineNumber = "29"
             endingLineNumber = "29"
             landmarkName = "configure(data:)"
+            landmarkType = "7">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            uuid = "A1E43562-2190-4F49-A1CD-BF0001BF3A7A"
+            shouldBeEnabled = "No"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "SpaceXapp/Modules/Main/Presenter/MainPresenter.swift"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "24"
+            endingLineNumber = "24"
+            landmarkName = "present(data:)"
             landmarkType = "7">
          </BreakpointContent>
       </BreakpointProxy>

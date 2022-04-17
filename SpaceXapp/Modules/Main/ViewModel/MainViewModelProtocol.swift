@@ -12,20 +12,18 @@ protocol MainViewModelProtocol: BaseViewModel<Any> {
     
     var filterByImagePublisher: Published<Bool>.Publisher { get }
     
+    var searchCollectionPublisher: Published<[Flight]>.Publisher { get }
+    
     var searchCollectionOfFlights: [Flight] { get set }
     
     var filterByImage: Bool { get set }
     
     var sorted: ComparisonResult { get set }
-    
-    var dataSource: UICollectionViewDiffableDataSource<Section,Flight.ID>? { get set }
-    
+        
     func search(text: String)
     
     func bind()
-    
-    func setItemNeedsUpdate(id: Flight.ID)
-    
+        
     func clearSearch()
     
     func downloadImage(from link: String, completion: @escaping(UIImage) -> Void)

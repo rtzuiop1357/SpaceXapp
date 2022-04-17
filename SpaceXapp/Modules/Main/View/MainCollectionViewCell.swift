@@ -7,7 +7,7 @@
 
 import UIKit
 
-class MainCollectionViewCell: UICollectionViewCell {
+class MainCollectionViewCell: BaseCell<Flight> {
     
     static let cellIdentifier = "cell"
     
@@ -39,17 +39,7 @@ class MainCollectionViewCell: UICollectionViewCell {
         return label
     }()
     
-    override init(frame: CGRect) {
-        super.init(frame: frame)
-        setupViews()
-        setupConstraints()
-    }
-    
-    required init?(coder: NSCoder) {
-        fatalError("init(coder:) has not been implemented")
-    }
-    
-     private func setupConstraints() {
+     override func addConstraints() {
          NSLayoutConstraint.activate([
             mainImageView.topAnchor.constraint(equalTo: topAnchor, constant: 8),
             mainImageView.centerXAnchor.constraint(equalTo: centerXAnchor),
@@ -64,7 +54,7 @@ class MainCollectionViewCell: UICollectionViewCell {
          ])
     }
 
-    private func setupViews() {
+    override func addViews() {
         addSubview(mainImageView)
         addSubview(nameLabel)
         addSubview(dateLabel)
