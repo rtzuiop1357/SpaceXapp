@@ -10,6 +10,7 @@ import UIKit
 class Networking {
     static let shared = Networking()
     
+    //set that stores active network calls
     var activeImageRequests: Set<String> = []
     
     func getFlightsData(_ completion: @escaping (Result<[Flight],NetworkingError>)->()){
